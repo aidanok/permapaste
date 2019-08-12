@@ -2,18 +2,12 @@
   <div>
     <div class="header">
       
-      <div class="logo">
-        <span>Perma</span><span>Paste</span><br/>
-      </div>
-      <div class="find-pastes">
-        <router-link to="/find">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        </router-link>
-      </div>
-
+      <perma-paste-logo style="padding-top: 0.4rem; padding-right: 0.3em;"></perma-paste-logo>
+      <find-pastes-link></find-pastes-link>
+      
     </div>
     
-    <div class="content" v-if="loaded && paste">
+    <div v-if="loaded && paste">
     
       <vue-simple-markdown v-if="paste.pasteFormat === 'markdown'" class="markdown-content" :source="paste.pasteText">
       </vue-simple-markdown>
@@ -44,53 +38,11 @@
 
 
 <style scoped>
-svg {
-  width: 1.3rem;
-  color: rgba(150,150,150,1);
-  transition: color 0.25s;
-}
-svg:hover {
-  color: rgba(100,100,100,1)
-}
 
 .header {
   display: flex;
   justify-content: flex-end;
   padding: 0em 1em;
-}
-.find-pastes {
-  padding: 0.5em;
-  padding-top: 1em;
-  transform: rotateY(15deg);
-  background: rgba(33,0,10,0.1);
-  border-radius: 10px;
-  transform: translateY(-10px);
-}
-.logo {
-  padding: 0.4em;
-}
-
-.logo pre {
-  font-size: 0.24em;
-  font-weight: bolder;
-  color: rgb(0, 0, 0);
-  padding: 0em;
-  margin: 0em;
-}
-.logo span {
-  font-size: 1.1em;
-}
-.logo span:nth-child(1) {
-  color: rgba(100,130,140,1)
-}
-.logo span:nth-child(2) {
-  color: rgba(250,170,70,1)
-}
-.logo span:nth-child(3) {
-  color: rgba(200,140,40,1)
-}
-.content {
-  background-color: initial;
 }
 
 p {

@@ -73,6 +73,7 @@ export async function postEncryptedPaste(paste: Paste,  pasteOptions: { password
   console.log(encrypted.encrypted)
   console.log(encrypted.salt)
   
+  
   const data = new Uint8Array(encrypted.encrypted)
   
   console.log(data)

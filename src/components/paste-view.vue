@@ -7,13 +7,16 @@
 
 <script lang="ts">
 
-export default {
-  props: {
-    paste: {
-      type: Object,
-      required: true,
-    },
-  }
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Prop } from 'vue-property-decorator'
+import { Paste } from '../app-model/pastes';
+
+@Component
+export default class PasteRender extends Vue {
+  
+  @Prop()
+  paste!: Paste
 }
 
 </script> 

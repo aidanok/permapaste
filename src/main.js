@@ -26,20 +26,23 @@ import App from './app.vue'
 import WalletLoad from './components/wallet-load.vue'
 import PasteView from './components/paste-view.vue'
 import FileLoad from './components/file-load'
+import FindPastesLink from './components/find-pastes-link'
+import PermaPasteLogo from './components/perma-paste-logo'
 
 // Top level views/pages
-import PastePost from './paste-post'
 
-import PostWizardRoot from './components/post-wizard-root.vue'
+import PagePost from './components/page-post.vue'
+import PageView from './components/page-view.vue'
+import PageFind from './components/page-find.vue'
+
 import PostStep0 from './components/post-step0.vue'
 import PostStep1 from './components/post-step1.vue'
 import PostStep2 from './components/post-step2.vue'
-import PasteViewPage from './components/paste-view-page.vue'
 
 const routes = [
   { path: '/', redirect: '/paste/edit' },
   { 
-    path: '/paste', component: PostWizardRoot, 
+    path: '/paste', component: PagePost, 
     children: [ 
       { path: 'edit', component: PostStep0 },
       { path: 'preview', component: PostStep1 },
@@ -48,8 +51,12 @@ const routes = [
   },
   { 
     path: '/view/:txId', 
-    component: PasteViewPage, 
+    component: PageView, 
     props: true,
+  },
+  {
+    path: '/find',
+    component: PageFind, 
   }
 ]
 
@@ -59,6 +66,8 @@ Vue.component('paste-view', PasteView)
 Vue.component('wallet-load', WalletLoad)
 Vue.component('password', Password)
 Vue.component('file-load', FileLoad)
+Vue.component('find-pastes-link', FindPastesLink)
+Vue.component('perma-paste-logo', PermaPasteLogo)
 
 const router = new VueRouter({ routes })
 

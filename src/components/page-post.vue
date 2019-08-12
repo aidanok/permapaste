@@ -2,29 +2,25 @@
   <div>
     
     <div class="header">
+      
       <div class="header-bar">
-        <div class="logo">
-        <span>Perma</span><span>Paste</span><br/>
-        <pre>    
+  
+        <div class="logo-and-byline">
+          <perma-paste-logo></perma-paste-logo>
+          <pre>   
        _ _                                           _   _                      _ _ 
   __ _| | |  _   _  ___  _   _   _ __   ___  ___  __| | (_)___    __ _ ___  ___(_|_)
  / _` | | | | | | |/ _ \| | | | | '_ \ / _ \/ _ \/ _` | | / __|  / _` / __|/ __| | |
 | (_| | | | | |_| | (_) | |_| | | | | |  __/  __/ (_| | | \__ \ | (_| \__ \ (__| | |
  \__,_|_|_|  \__, |\___/ \__,_| |_| |_|\___|\___|\__,_| |_|___/  \__,_|___/\___|_|_|
              |___/                                                                  
-        </pre>
+          </pre>
         </div>
 
-        
-        <div class="find-pastes">
-          <router-link to="/find">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </router-link>
-        </div>
-
+        <find-pastes-link></find-pastes-link>
       </div>
+
     </div>
-    
     
     <div class="container">
       <div>
@@ -39,66 +35,47 @@
 </template>
 
 <style scoped>
-svg {
-  width: 1.3rem;
-  color: rgba(150,150,150,1);
-  transition: color 0.25s;
-}
-svg:hover {
-  color: rgba(100,100,100,1)
-}
+
 .container {
   margin: 0em 1em;
   display: flex;
   justify-content: start;
 }
+
 .container div:nth-child(1) {
   max-width: 600px;
   flex-grow: 1;
 }
+
 .header {
   background: rgba(240,240,210,1);
   display: flex;
   justify-content: start;
 }
+
 .header-bar {
   flex-grow: 1;
   max-width: 600px;
   display: flex;
   align-items: flex-start;
 }
-.find-pastes {
-  padding: 0.5em;
-  padding-top: 1em;
-  transform: rotateY(15deg);
-  background: rgba(33,0,10,0.1);
-  border-radius: 10px;
-  transform: translateY(-10px);
-}
-.logo {
+
+.logo-and-byline {
   flex-grow: 1;
   max-width: 600px;
-  padding: 1em 1em 0.2em 1em;
+  padding-left: 0.6rem;
+  padding-top: 0.6rem;
 }
-.logo pre {
+
+.logo-and-byline pre {
   font-size: 0.24em;
   font-weight: bolder;
   color: rgb(0, 0, 0);
   padding: 0em;
   margin: 0em;
 }
-.logo span {
-  font-size: 1.1em;
-}
-.logo span:nth-child(1) {
-  color: rgba(100,130,140,1)
-}
-.logo span:nth-child(2) {
-  color: rgba(250,170,70,1)
-}
-.logo span:nth-child(3) {
-  color: rgba(200,140,40,1)
-}
+
+
 </style>
 
 <style>
