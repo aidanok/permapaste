@@ -115,7 +115,8 @@ export default class PostStep2 extends Vue {
         this.postedLink = `${window.location.protocol}//${window.location.host}/#/view/${posted.txId}`
         this.posted = true;
         this.wasPublic = globalStore.PasteEditing.paste.pastePrivacy === 'public'
-      } catch (e) { 
+        this.editing.reset();
+      } catch (e) {
         this.error.push(e.message || e.type);
       }
     }
