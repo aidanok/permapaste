@@ -5,14 +5,19 @@
         
         <p>
           You have chosen to post a <b>private</b> paste. This will be saved 
-          encrypted and unreadable on the permaweb unless the user is 
+          encrypted and unreadable on the Arweave blockchain unless the user is 
           given the password.
+        </p>
+
+        <p>
+          This paste will have no metadata identifying it as an encrypted paste. It will be a data transaction from 
+          your wallet with a sequence of random bytes as the payload.  
         </p>
         
         <p class="disclaimer">
           <ul>
             <li>This post cannot be taken down, if someone gains access it is permanent! </li>
-            <li>This post is not anonymous! It can be tracked to the wallet you used to post it </li>
+            <li>This post is not anonymous! It can be tracked to the wallet and IP you used to post it </li>
           </ul>
         </p>
         
