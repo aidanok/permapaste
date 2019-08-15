@@ -11,7 +11,8 @@
 
         <p>
           This paste will have no metadata identifying it as an encrypted paste. It will be a data transaction from 
-          your wallet with a sequence of random bytes as the payload.  
+          the supplied wallet with a sequence of random bytes as the payload.  If you do not store the URL, you will 
+          can search through the wallets transactions to find it again. 
         </p>
         
         <p class="disclaimer">
