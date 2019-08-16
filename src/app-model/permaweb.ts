@@ -17,6 +17,10 @@ export const arweave = Arweave.init({
     protocol: 'https'
 });
 
+export function isValidWalletAddr(str: string): boolean {  
+  return str.length === 43
+}
+
 // mocks post() and get() to not actually write to 
 // permaweb but to an in-memory list.
 // Simulates TX_PENDING / 202 errors for 1 minute after a tx is posted.

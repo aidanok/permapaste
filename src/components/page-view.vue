@@ -9,11 +9,8 @@
     
     <div v-if="loaded && paste">
     
-      <vue-simple-markdown v-if="paste.pasteFormat === 'markdown'" class="markdown-content" :source="paste.pasteText">
-      </vue-simple-markdown>
-      
-      <pre v-else> {{ paste.pasteText }} </pre>
-    
+      <paste-render :paste="paste"></paste-render>
+     
     </div>
     
     <div class="unlock-screen" v-if="loaded && encrypted && !paste"> 

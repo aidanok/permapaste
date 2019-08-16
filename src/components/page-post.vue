@@ -48,7 +48,7 @@
 }
 
 .header {
-  background: rgba(240,240,210,1);
+  background: rgb(210, 224, 207);
   display: flex;
   justify-content: start;
 }

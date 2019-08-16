@@ -1,7 +1,7 @@
 <template>
    <div>
     <h5>{{ globalStore.PasteEditing.paste.pasteTitle || 'Preview' }}</h5>
-    <paste-view class="paste-preview" :paste="globalStore.PasteEditing.paste"></paste-view>
+    <paste-render class="paste-preview" :paste="globalStore.PasteEditing.paste"></paste-render>
     <div class="step-footer">
       <button @click="$router.go(-1)" class="secondary-btn">Back to Editing</button>
       <button @click="$router.push('/paste/finalize/')">Finalize</button>

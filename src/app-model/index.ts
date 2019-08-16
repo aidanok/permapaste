@@ -9,5 +9,6 @@ export const globalStore = {
   PasteEditing: new PasteEditing(),
 };
 
+// Just for debugging.
 (window as any).globalStore = globalStore;
 (window as any).arweave = arweave;

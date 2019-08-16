@@ -6,8 +6,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 3rd party components & css
-import VueSimpleMarkdown from 'vue-simple-markdown'
-import './css/vue-simple-markdown.css'
 
 import Password from 'vue-password-strength-meter'
 
@@ -18,13 +16,10 @@ import './css/loading/loading-btn.css'
 // Local 
 import App from './app.vue'
 
-// import PasteEditor from './components/paste-editor.vue'
-// import PasteFinalize from './components/paste-finalize.vue'
-
 
 // Local components.
 import WalletLoad from './components/wallet-load.vue'
-import PasteView from './components/paste-view.vue'
+import PasteRender from './components/paste-render.vue'
 import FileLoad from './components/file-load'
 import FindPastesLink from './components/find-pastes-link'
 import PermaPasteLogo from './components/perma-paste-logo'
@@ -62,7 +57,7 @@ const routes = [
 
 
 
-Vue.component('paste-view', PasteView)
+Vue.component('paste-render', PasteRender)
 Vue.component('wallet-load', WalletLoad)
 Vue.component('password', Password)
 Vue.component('file-load', FileLoad)
@@ -85,7 +80,6 @@ const router = new VueRouter({ routes })
 
 
 Vue.use(VueRouter)
-Vue.use(VueSimpleMarkdown)
 
 // Run Vue
 const app = new Vue({

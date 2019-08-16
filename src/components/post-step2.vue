@@ -11,7 +11,7 @@
 
         <p>
           This paste will have no metadata identifying it as an encrypted paste. It will be a data transaction from 
-          the supplied wallet with a sequence of random bytes as the payload.
+          the given wallet with a sequence of random bytes as the payload.
         </p>
         
         <p class="disclaimer">
@@ -33,7 +33,7 @@
       <div v-else>
         <p>
         You have chosen to post a <b>public</b> paste. This will be saved
-        on the permaweb and public on the blockchain      
+        on the Arweave blockchain and accessible to anyone.      
         </p>
       </div>
       

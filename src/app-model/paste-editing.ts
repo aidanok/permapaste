@@ -18,6 +18,7 @@ export class PasteEditing {
   }
 
   // Pastes that are pending for the next block, most recent first
+  // UNUSED
   pendingPaste: PasteContainer | EncryptedPasteContainer | null = null;
  
   public reset(): void {
@@ -54,6 +55,7 @@ export class PasteEditing {
     return result;
   }
 
+  // UNUSED
   public async waitForPending(): Promise<TransactionStatusResponse> {
     
     if (!this.pendingPaste) {
