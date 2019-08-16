@@ -67,6 +67,7 @@
   display: inline-block;
   padding: 1em;
   margin-left: 0.6em;
+  white-space: nowrap;
 }
   
 [type="file"]:focus + label,
