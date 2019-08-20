@@ -10,24 +10,28 @@ import * as ArweaveUtils from 'arweave/web/lib/utils'
  * @param password the password.
  * @param userSalt optional user supplied salt. should be something unique.
  */
-export async function encryptData(str: string, password: string, userSalt?: Uint8Array): Promise<{ encrypted: ArrayBuffer, salt: Uint8Array }> {
+export async function encryptData(str: string, password: string): Promise<{ encrypted: ArrayBuffer }> {
   
-  const salt = userSalt ? userSalt : crypto.getRandomValues(new Uint8Array(20));
+  const salt = crypto.getRandomValues(new Uint8Array(20))
+  const iv = crypto.getRandomValues(new Uint8Array(20))
   
   const key = await deriveKey(salt, password);
-  
-  const encrypted = await window.crypto.subtle.encrypt(
+
+  const ciphertext = await window.crypto.subtle.encrypt(
     {
       name: "AES-GCM",
-      iv: salt
+      iv: iv
     },
     key,
     new TextEncoder().encode(str)
   );
-  
+  const encrypted = new Uint8Array(20+20+ciphertext.byteLength) 
+  encrypted.set(salt, 0)
+  encrypted.set(iv, salt.byteLength)
+  encrypted.set(new Uint8Array(ciphertext), salt.byteLength + iv.byteLength)
+
   return {
-    encrypted,
-    salt,
+    encrypted: encrypted.buffer,
   }
 }
 
@@ -38,18 +42,23 @@ export async function encryptData(str: string, password: string, userSalt?: Uint
  * @param salt 
  * @param password 
  */
-export async function decryptData(encrypted: ArrayBuffer, salt: Uint8Array, password: string): Promise<ArrayBuffer> {
+export async function decryptData(encrypted: ArrayBuffer, password: string): Promise<ArrayBuffer> {
   
+  const salt = new Uint8Array(encrypted.slice(0, 20))
+  const iv = new Uint8Array(encrypted.slice(20, 40)) 
+  const ciphertext = new Uint8Array(encrypted.slice(40))
+    
   const key = await deriveKey(salt, password)
-  
+
   const decrypted = await window.crypto.subtle.decrypt(
     {
       name: "AES-GCM",
-      iv: salt
+      iv: iv
     },
     key,
-    encrypted
+    ciphertext
   );
+  
   return decrypted
 }
 
@@ -84,7 +93,6 @@ async function deriveKey(salt: Uint8Array, password: string) {
   );
 
 }
-
 
 export function generateRandomStrongPassword(): string {
   const bytes = crypto.getRandomValues(new Uint8Array(27))

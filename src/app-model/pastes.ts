@@ -27,7 +27,6 @@ export interface EncryptedPasteContainer {
   encrypted: true
   txId: string
   paste: Uint8Array
-  salt: string
 }
 
 /**
@@ -38,6 +37,7 @@ export interface EncryptedPasteContainer {
  * @param jwk 
  */
 export async function postPlaintextPaste(paste: Paste, jwk: any): Promise<PasteContainer> {
+  console.info('Posting plaintext paste')
   const tx = await arweave.createTransaction({ data: paste.pasteText }, jwk)
   
   tx.addTag(TYPE_TAG, TYPE_TAG_PUBLIC)
@@ -46,8 +46,7 @@ export async function postPlaintextPaste(paste: Paste, jwk: any): Promise<PasteC
   tx.addTag("Content-Type", "text/plain")
   
   await arweave.transactions.sign(tx, jwk)
-  const response = await arweave.transactions.post(tx)
-  console.log('Tx Post Response:', response)
+  await arweave.transactions.post(tx)
   return {
     encrypted: false,
     paste,
@@ -68,38 +67,24 @@ export async function postEncryptedPaste(paste: Paste,  pasteOptions: { password
   console.info('Encrypting paste and posting')
   const json = JSON.stringify(paste)
   const encrypted = await encryptData(json, pasteOptions.password)
-  const salt = ArweaveUtils.bufferTob64Url(encrypted.salt);
-  
-  console.log(encrypted.encrypted)
-  console.log(encrypted.salt)
-  
-  
   const data = new Uint8Array(encrypted.encrypted)
   
-  console.log(data)
-
   const tx = await arweave.createTransaction({ 
     data: data
   }, jwk)
-  tx.addTag(TYPE_TAG, TYPE_TAG_ENCRYPTED)
-  tx.addTag(SALT_TAG, salt)
   
-  console.log('SIGNING')
   await arweave.transactions.sign(tx, jwk)
-  console.log(tx)
-  const response = await arweave.transactions.post(tx)
-  console.debug('Tx Post Response:', response)
-
+  await arweave.transactions.post(tx)
+ 
   return {
     encrypted: true,
     paste: data,
-    salt,
     txId: tx.id
   }
 }
 
 export async function decryptPasteContainer(container: EncryptedPasteContainer, password: string): Promise<PasteContainer> {
-  const dec = await decryptData(container.paste, ArweaveUtils.b64UrlToBuffer(container.salt), password)
+  const dec = await decryptData(container.paste, password)
   return {
     encrypted: false,
     paste: JSON.parse(new TextDecoder().decode(dec)),
@@ -113,17 +98,16 @@ export async function getPaste(txId: string): Promise<PasteContainer | Encrypted
 
   const tags = tx.tags.map(tag => ({ name: ArweaveUtils.b64UrlToString(tag.name), value: ArweaveUtils.b64UrlToString(tag.value) }))
   
-  const saltTag = tags.find(x => x.name === SALT_TAG)
   const formatTag = tags.find(x => x.name === FORMAT_TAG) 
   const titleTag = tags.find(x => x.name === TITLE_TAG)
 
-  if (!saltTag) {
+  if (formatTag) {
     return {
       encrypted: false,
       paste: {
         pasteText: ArweaveUtils.b64UrlToString(tx.data),
         pasteFormat: (formatTag && formatTag.value == 'markdown') ? 'markdown' : 'plaintext',
-        pastePrivacy: saltTag ? 'private' : 'public',
+        pastePrivacy: 'public',
         pasteTitle: (titleTag && titleTag.value) || ''
       },
       txId: tx.id
@@ -133,7 +117,6 @@ export async function getPaste(txId: string): Promise<PasteContainer | Encrypted
     return {
       encrypted: true,
       paste: tx.get('data', { decode: true, string: false }),
-      salt: saltTag.value,
       txId: tx.id
     }
   }
