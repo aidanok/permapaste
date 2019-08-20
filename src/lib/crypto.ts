@@ -1,5 +1,7 @@
 
-import * as ArweaveUtils from 'arweave/web/lib/utils'
+import scrpyt from 'scrypt-async'
+import * as ArweaveUtils from 'arweave/web/lib/utils' // for base64url utils
+
 
 /**
  * Encrypt a piece of string data, with a given password.  
@@ -64,16 +66,24 @@ export async function decryptData(encrypted: ArrayBuffer, password: string): Pro
 
 /**
  * Derives a 256bit key from salt and password.
- * TODO: use scrypt before PBKDF2 to increase brute-force resistance.
  * 
+ * Uses scrypt with N = 2^19  R = 8, P = 1 and follows that 
+ * with the browsers PBKDF2 set at 50,000 iterations.
+ *  
  * @param salt 
  * @param password 
  */
 async function deriveKey(salt: Uint8Array, password: string) {
+
+  // we use the first 12 bytes of the salt for the scrypt phase, 
+  // and then we do a standard PBKDF2 phase using the remaining 8 bytes from the 
+  // salt and the key produced from scrypt. 
+  
+  const key1 = await scryptPromise(password.normalize('NFKC'), salt.slice(0, 12))
   
   const rawPasswordKey = await window.crypto.subtle.importKey(
     'raw',
-    new TextEncoder().encode(password),
+    key1,
     { name: 'PBKDF2' } as any, // fails type check. 
     false,
     [ 'deriveBits', 'deriveKey' ]
@@ -82,8 +92,8 @@ async function deriveKey(salt: Uint8Array, password: string) {
   return window.crypto.subtle.deriveKey(
     {
       "name": "PBKDF2",
-      salt: salt,
-      "iterations": 250000,
+      salt: salt.slice(12, 20),
+      "iterations": 50000,
       "hash": "SHA-256"
     },
     rawPasswordKey,
@@ -92,6 +102,26 @@ async function deriveKey(salt: Uint8Array, password: string) {
     [ "encrypt", "decrypt" ]
   );
 
+}
+
+
+// Wraps scrypt-async as promise and sets parameters
+// N increased to 2^19
+function scryptPromise(password: string, salt: Uint8Array): Promise<Uint8Array> {
+  
+  return new Promise((res, rej) => {
+    scrpyt(password as any, salt as any, {  N: 524288,
+      r: 8,
+      p: 1,
+      dkLen: 256,
+      interruptStep: 200,
+      encoding: 'binary'}, (result: any) => {
+        if (result && result instanceof Uint8Array) {
+          res(result)
+        }
+        rej('scrypt failed')
+      })
+  })
 }
 
 export function generateRandomStrongPassword(): string {
