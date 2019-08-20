@@ -90,6 +90,9 @@ export default class extends Vue {
   @Prop()
   txId!: string
 
+  @Prop() 
+  urlPassword!: string  
+
   created() {
     this.loadPaste(this.txId)
   }
@@ -106,7 +109,7 @@ export default class extends Vue {
     this.loaded = false
     this.isPending = false
     console.log('Getting paste with txId:' + txId)
-    
+    console.log(`Url Password is ${this.urlPassword}`)
     let container: EncryptedPasteContainer | PasteContainer | undefined
 
     // Loop on pending, otherwise break.
@@ -136,9 +139,20 @@ export default class extends Vue {
       this.loaded = true
     }
 
+    if (this.loaded && this.encrypted && this.urlPassword) {
+      try { 
+        this.password = this.urlPassword;
+        await this.unlock(false);
+      } catch (e) {
+        this.loaded = false;
+        this.errors.push('Unable to decrypt')
+      }
+      
+    }
+
   }
 
-  async unlock() {
+  async unlock(interactive = true) {
     this.unlocking = true
     this.errors = []
     if (!this.password) {
@@ -152,7 +166,7 @@ export default class extends Vue {
         this.errors.push('Unable to unlock. Incorrect password')
       }
     }
-
+  
     if (this.errors.length) {
       window.alert(this.errors.join('\n'))
     }

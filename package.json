@@ -24,6 +24,7 @@
     "parcel": "^1.12.3",
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",
+    "vue-clipboard2": "^0.3.0",
     "vue-hot-reload-api": "^2.3.3",
     "vue-password-strength-meter": "^1.4.2",
     "vue-property-decorator": "^8.2.1",

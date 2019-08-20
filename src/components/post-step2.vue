@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-if="!posted">
+    <div>
       <div v-if="editing.paste.pastePrivacy === 'private'">
         
         <p>
           You have chosen to post a <b>private</b> paste. This will be saved 
           encrypted and unreadable on the Arweave blockchain unless the user is 
-          given the password.
+          given the URL & password.
         </p>
 
         <p>
@@ -21,12 +21,14 @@
           </ul>
         </p>
         
-        <div>
-          <password
+        <div class="password-box">
+          
+           <password
             v-model="editing.pasteOptions.password"
             :toggle="true"
-            placeholder="Password"
+            placeholder="Password (Optional)"
             />
+            
         </div>
       </div>
 
@@ -42,16 +44,8 @@
       </div>  
     </div>
 
-    <div class="posted" v-if="posted"> 
-      <p>
-        Your paste is pending inclusion in the next block. It will be available at
-      </p>
-      <a :href="postedLink"> {{ postedLink }}</a>
-      <p v-if="wasPublic">
-      </p>
-    </div>
     
-    <div v-if="!posted" class="step-footer">
+    <div class="step-footer">
       <button @click="$router.go(-2)" class="secondary-btn">Back to Editing</button>
       <button @click="tryPost" class="ld-ext-right" v-bind:class="{ running: posting }">
         Post to Permaweb
@@ -64,11 +58,8 @@
 </template>
 
 <style scoped>
-.posted {
-  text-align: center;
-  font-size: 0.8em;
-  color: rgb(50,50,50);
-}
+
+
 .disclaimer {
   font-size: 0.76em;
   color: rgb(70, 5, 5, 1);
@@ -88,6 +79,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import { globalStore } from '../app-model'
+import { generateRandomStrongPassword } from '../app-model/crypto'
 
 @Component
 export default class PostStep2 extends Vue {
@@ -98,14 +90,22 @@ export default class PostStep2 extends Vue {
   error: string[] = []
   postedLink = ''
   wasPublic = false;
+  wasGeneratedPw = false;
 
   async tryPost() {
     if (this.posted || this.posting) {
-      return 
+      return
     }
-    this.posting = true 
+    this.posting = true
     this.error = []
-    if (!globalStore.PasteEditing.isNonEmptyPaste) {
+    
+    // Generate a password if none given, it will be appended to the url.
+    if (!this.editing.pasteOptions.password) {
+      this.editing.pasteOptions.password = generateRandomStrongPassword()
+      this.wasGeneratedPw = true;
+    }
+   
+   if (!globalStore.PasteEditing.isNonEmptyPaste) {
       this.error.push('You cant post an empty paste!')
     }
     else if (!globalStore.PasteEditing.isPasswordOk) {
@@ -118,6 +118,9 @@ export default class PostStep2 extends Vue {
         const posted = await globalStore.PasteEditing.postPaste(globalStore.LoadedWallet)
         // make link. 
         this.postedLink = `${window.location.protocol}//${window.location.host}/#/view/${posted.txId}`
+        if (this.wasGeneratedPw) {
+          this.postedLink += `/${globalStore.PasteEditing.pasteOptions.password}`
+        }
         this.posted = true;
         this.wasPublic = globalStore.PasteEditing.paste.pastePrivacy === 'public'
         this.editing.reset();
@@ -129,6 +132,9 @@ export default class PostStep2 extends Vue {
       window.alert(this.error.join('\n'))
     }
     this.posting = false;
+    if (this.posted) {
+      (this as any).$router.push({ path: '/paste/finished', query: { postedLink: this.postedLink, wasGeneratedPw: this.wasGeneratedPw, wasPublic: this.wasPublic }}) 
+    }
   }
 
 } 

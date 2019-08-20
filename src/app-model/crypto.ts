@@ -1,4 +1,6 @@
 
+import * as ArweaveUtils from 'arweave/web/lib/utils'
+
 /**
  * Encrypt a piece of string data, with a given password.  
  * Password will be passed through a key-stretching function
@@ -81,4 +83,10 @@ async function deriveKey(salt: Uint8Array, password: string) {
     [ "encrypt", "decrypt" ]
   );
 
+}
+
+
+export function generateRandomStrongPassword(): string {
+  const bytes = crypto.getRandomValues(new Uint8Array(27))
+  return ArweaveUtils.bufferTob64Url(bytes)
 }
