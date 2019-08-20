@@ -106,7 +106,7 @@ export default class PostStep2 extends Vue {
     this.error = []
     
     // Generate a password if none given, it will be appended to the url.
-    if (!this.editing.pasteOptions.password) {
+    if (this.editing.paste.pastePrivacy === 'private' && !this.editing.pasteOptions.password) {
       this.editing.pasteOptions.password = generateRandomStrongPassword()
       this.wasGeneratedPw = true;
     }
