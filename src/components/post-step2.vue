@@ -22,13 +22,8 @@
         </p>
         
         <div class="password-box">
-          
-           <password
-            v-model="editing.pasteOptions.password"
-            :toggle="true"
-            placeholder="Password (Optional)"
-            />
-            
+           <input placeholder="Password (Optional)" v-bind:type="pwInputHide ? 'password' : 'text'" v-model="editing.pasteOptions.password"/>
+           <button class="secondary-btn" @click="pwInputHide = !pwInputHide">Show</button>
         </div>
       </div>
 
@@ -59,6 +54,15 @@
 
 <style scoped>
 
+.password-box {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.password-box button {
+  padding: 0.5em;
+}
 
 .disclaimer {
   font-size: 0.76em;
@@ -97,6 +101,8 @@ export default class PostStep2 extends Vue {
   postedLink = ''
   wasPublic = false;
   wasGeneratedPw = false;
+
+  pwInputHide = true; 
 
   async tryPost() {
     if (this.posted || this.posting) {

@@ -7,7 +7,6 @@ import VueRouter from 'vue-router'
 
 // 3rd party components & css
 
-import Password from 'vue-password-strength-meter'
 import VueClipboard from 'vue-clipboard2'
 
 // 3rd party css
@@ -81,7 +80,6 @@ const routes = [
 
 Vue.component('paste-render', PasteRender)
 Vue.component('wallet-load', WalletLoad)
-Vue.component('password', Password)
 Vue.component('file-load', FileLoad)
 Vue.component('find-pastes-link', FindPastesLink)
 Vue.component('perma-paste-logo', PermaPasteLogo)
