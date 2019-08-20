@@ -9,7 +9,7 @@
     
     <div v-if="loaded && paste">
     
-      <paste-render :paste="paste"></paste-render>
+      <paste-render v-bind:class="{ 'paste-render-margin': paste.pasteFormat === 'markdown' }" :paste="paste"></paste-render>
      
     </div>
     
@@ -33,9 +33,11 @@
   </div>
 </template>
 
-
 <style scoped>
 
+.paste-render-margin {
+  margin: 1rem;
+}
 .header {
   display: flex;
   justify-content: flex-end;
@@ -73,8 +75,6 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop, Watch } from 'vue-property-decorator'
 import { getPaste, decryptPasteContainer, Paste, PasteContainer, EncryptedPasteContainer } from '../app-model/pastes'
-
-// qGpB9P6jRYL96Ycy-Irzu3Pi8P-29O8aM7_yZzHIEqM
 
 @Component
 export default class extends Vue {
