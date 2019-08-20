@@ -10,9 +10,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
-import { Paste } from '../app-model/pastes'
-import { marked } from '../app-model/markdown'
-import { DOMPurify } from '../app-model/dom-purify'
+import { Paste } from '../lib/pastes'
+import { marked } from '../lib/markdown'
+import { DOMPurify } from '../lib/dom-purify'
 
 @Component
 export default class PasteRender extends Vue {

@@ -21,8 +21,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
-import { Paste, TYPE_TAG, TYPE_TAG_PUBLIC } from '../app-model/pastes'
-import { arweave, isValidWalletAddr } from '../app-model/permaweb'
+import { Paste, TYPE_TAG, TYPE_TAG_PUBLIC } from '../lib/pastes'
+import { arweave, isValidWalletAddr } from '../lib/permaweb'
 
 @Component
 export default class extends Vue {

@@ -16,7 +16,7 @@
         This paste is posted publicy, you can search for it by wallet and anyone can find and read it.
       </p>
 
-      <button class="secondary-btn" @click="$copyText(postedLink)">Copy link to clipboard</button>
+      <button class="secondary-btn" @click="$copyText(postedLink)">Copy link</button>
     </div>
 </template>
 

@@ -22,7 +22,7 @@
         </p>
         
         <div class="password-box">
-           <input placeholder="Password (Optional)" v-bind:type="pwInputHide ? 'password' : 'text'" v-model="editing.pasteOptions.password"/>
+           <input autocomplete="new-password" placeholder="Password (Optional)" v-bind:type="pwInputHide ? 'password' : 'text'" v-model="editing.pasteOptions.password"/>
            <button class="secondary-btn" @click="pwInputHide = !pwInputHide">Show</button>
         </div>
       </div>
@@ -88,8 +88,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { globalStore } from '../app-model'
-import { generateRandomStrongPassword } from '../app-model/crypto'
+import { globalStore } from '../lib/'
+import { generateRandomStrongPassword } from '../lib/crypto'
 
 @Component
 export default class PostStep2 extends Vue {

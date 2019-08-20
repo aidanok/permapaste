@@ -74,7 +74,7 @@ p {
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop, Watch } from 'vue-property-decorator'
-import { getPaste, decryptPasteContainer, Paste, PasteContainer, EncryptedPasteContainer } from '../app-model/pastes'
+import { getPaste, decryptPasteContainer, Paste, PasteContainer, EncryptedPasteContainer } from '../lib/pastes'
 
 @Component
 export default class extends Vue {

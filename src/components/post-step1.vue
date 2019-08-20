@@ -12,7 +12,7 @@
 <script lang="ts">
 
 import Vue from 'vue'
-import { globalStore } from '../app-model'
+import { globalStore } from '../lib'
 
 export default Vue.extend({
   data() {
