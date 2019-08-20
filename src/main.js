@@ -18,8 +18,8 @@ import 'highlight.js/styles/github.css';
 import 'github-markdown-css/github-markdown.css'
 
 // Local 
+import './css/app.css'
 import App from './app.vue'
-
 
 // Local components.
 import WalletLoad from './components/wallet-load.vue'

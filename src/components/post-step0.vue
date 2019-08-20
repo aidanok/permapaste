@@ -14,7 +14,7 @@
             <input type="radio" name="pastePrivacy" v-model="editing.paste.pastePrivacy" value="public" checked>Public<br>
             <input type="radio" name="pastePrivacy" v-model="editing.paste.pastePrivacy" value="private">Encrypted<br>
           </div>
-        </div> 
+        </div>
       </div>
 
       <div class="paste-content">
@@ -51,7 +51,7 @@ export default class extends Vue {
 
 .step-footer-0 {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   padding-top: 0.5em;
 }
 

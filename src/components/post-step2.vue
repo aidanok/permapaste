@@ -71,6 +71,12 @@
 .wallet {
   padding: 0em 0em;
 }
+.step-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.5em;
+}
+
 </style>
 
 <script lang="ts">

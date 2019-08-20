@@ -1,0 +1,46 @@
+
+/* Buttons styles start */
+button {
+  display: inline-block;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: rgb(80, 103, 110);
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.secondary-btn {
+color:  rgb(80, 103, 110);
+background: #ffffff;
+border: 1px solid rgba(80, 103, 110, .4)
+}
+
+
+.secondary-btn:hover,
+.secondary-btn:focus {
+  background:rgb(224, 231, 239);
+}
+
+button:hover,
+button:focus {
+  background:rgba(80,110,140,1);
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+

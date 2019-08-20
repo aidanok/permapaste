@@ -21,5 +21,22 @@ export default Vue.extend({
 })
 </script>
 
+<style scoped>
+
+.paste-preview {
+  padding: 1em;
+  min-height: 200px;
+  min-width: 200px;
+  border: 1px dashed rgb(0,0,0,0.3);
+}
+
+.step-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.5em;
+}
+
+</style>
+
 
   
