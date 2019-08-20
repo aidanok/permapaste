@@ -5,12 +5,6 @@
   </div>
 </template>
 
-<style>
-.markdown-body {
-  padding: 1rem;
-}
-</style>
-
 <script lang="ts">
 
 import Vue from 'vue'
