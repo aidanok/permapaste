@@ -27,6 +27,10 @@
 
         <div v-else> 
 
+          <p class="results-text" v-if="searched === ''">
+            Search by wallet or by block number to find previous pastes
+          </p>
+
           <p class="results-text" v-if="searched !== '' && errors.length == 0 && totalResultCount > 0" >
             Results for {{ searched }} {{ searched === 'wallet' ? walletAddr : blockHeight }}
           </p>
@@ -91,23 +95,10 @@ export default class extends Vue {
   searching = false;
   searched: 'block' | 'wallet' | ''  = ''
 
-  allTxs: ArqlExtraResult[] = [
-    { id: 'fooo4343434', tags: [], status: { status: 200, confirmed: { block_height: 400, block_indep_hash: 'dfdfa', number_of_confirmations: 100 } } }, 
-    { id: 'fooo2okpoojkfdfdfq', tags: [], status: { status: 200, confirmed: { block_height: 450, block_indep_hash: 'dfdfa', number_of_confirmations: 100 } } }, 
-    { id: 'fooo31224466662aabb', tags: [], status: { status: 200, confirmed: { block_height: 410, block_indep_hash: 'dfdfa', number_of_confirmations: 100 } } }, 
-    { id: 'fooo4-not', tags: [ {name: 'tag', value: 'val'} ], status: { status: 200, confirmed: { block_height: 400, block_indep_hash: 'dfdfa', number_of_confirmations: 100 } } },  
-  ]
-
-  publicPastes: (ArqlExtraResult & { title?: string })[] = [
-    { id: 'fooo', tags: [], status: { status: 200, confirmed: { block_height: 400, block_indep_hash: 'dfdfa', number_of_confirmations: 100 } } }, 
-    { id: 'fooo7', tags: [], status: { status: 200, confirmed: { block_height: 450, block_indep_hash: 'dfdfa', number_of_confirmations: 100 } } }, 
-    { id: 'fooo9qqwpopqxaaa', tags: [ { name: 'Title', value: 'Foobar' } ], status: { status: 200, confirmed: { block_height: 410, block_indep_hash: 'dfdfa', number_of_confirmations: 100 } } }, 
-  ]
+  allTxs: ArqlExtraResult[] = [] 
+  publicPastes: (ArqlExtraResult & { title?: string })[] = []
 
   errors: string[] = [];
-
-  
-  
 
   async searchByWallet() {
     this.searching = true;
@@ -205,7 +196,9 @@ export default class extends Vue {
   margin-left: 1em;
   margin-top: 1em;
 }
-
+.search-input-section {
+  margin-bottom: 3rem;
+}
 .search-input-form {
   display: flex;
   align-items: stretch;
@@ -218,6 +211,7 @@ export default class extends Vue {
   margin-left: 0.15em;
   padding: 0.5em;
 }
+
 .results-text {
   margin-top: 2em;
   text-align: center;
