@@ -13,9 +13,10 @@
      
     </div>
     
-    <div class="unlock-screen" v-if="loaded && encrypted && !paste"> 
+    <div class="unlock-screen" v-if="loaded && encrypted && !paste && !unlocking"> 
       <p> This paste is locked </p>
       <input v-on:keyup.enter="unlock" type=password placeholder="Enter password" v-model="password">
+    
     </div>
     
     <div v-if="!loaded && !errors.length" class="ld ll">
@@ -23,6 +24,14 @@
       </div>
       <p>
         {{ isPending ? 'TX is pending inclusion in the next block, please wait.' : 'Loading...' }}
+      </p>
+    </div>
+
+    <div v-if="loaded && encrypted && unlocking" class="ld ll">
+      <div class="ld ld-ring ld-spin-fast">
+      </div>
+      <p>
+        Decrypting...
       </p>
     </div>
 
@@ -142,17 +151,16 @@ export default class extends Vue {
     if (this.loaded && this.encrypted && this.urlPassword) {
       try { 
         this.password = this.urlPassword;
-        await this.unlock(false);
+        await this.unlock();
       } catch (e) {
         this.loaded = false;
         this.errors.push('Unable to decrypt')
-      }
-      
+      } 
     }
 
   }
 
-  async unlock(interactive = true) {
+  async unlock() {
     this.unlocking = true
     this.errors = []
     if (!this.password) {
@@ -166,11 +174,13 @@ export default class extends Vue {
         this.errors.push('Unable to unlock. Incorrect password')
       }
     }
-  
-    if (this.errors.length) {
-      window.alert(this.errors.join('\n'))
-    }
     this.unlocking = false
+    if (this.errors.length) {
+      // setTimeout so UI can update before the (synchronous) alert box comes up
+      setTimeout(() => {
+        window.alert(this.errors.join('\n'))
+      }, 0)
+    }
   }
 
 }
