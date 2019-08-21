@@ -5,6 +5,7 @@
  */
 
 import Arweave from 'arweave/web';
+import * as ArweaveUtils from 'arweave/web/lib/utils'
 
 import Transaction from 'arweave/web/lib/transaction';
 import ArweaveError, { ArweaveErrorType } from 'arweave/web/lib/error'
@@ -20,6 +21,46 @@ export const arweave = Arweave.init({
 export function isValidWalletAddr(str: string): boolean {  
   return str.length === 43
 }
+
+export interface ArqlExtraResult { id: string, tags: { name: string, value: string }[], status: TransactionStatusResponse }
+
+export async function txExtra(results: string[]) {
+  
+  const resultsExtra: ArqlExtraResult[] = []
+  // do this sequentially so we dont fire off too many requests at a time. 
+  // retries forever..
+  for (var i = 0; i < results.length; i++) {
+    let delay = 650;
+    while(true) {
+      try {
+        const { tags, status } = await getTxMetadata(results[i])
+        resultsExtra.push({ id: results[i], tags, status }) 
+        break; // break loop.
+      }
+      catch (e) {
+        console.error(e)
+        console.error(`Got error retrieving tx metadata, will retry`)
+        await new Promise(res => setTimeout(res, Math.max(40000, delay*=2)))
+      }
+    }
+  }  
+  return resultsExtra
+}
+
+export async function getTxMetadata(id: string) {
+  const [ encodedTags, status ] = await Promise.all([
+    arweave.api.get(`/tx/${id}/tags`).then(x => x.data),
+    arweave.transactions.getStatus(id)
+  ])
+  const tags: { name: string, value: string }[] = encodedTags.map((x: any) => ({
+    name: ArweaveUtils.b64UrlToString(x.name),
+    value: ArweaveUtils.b64UrlToString(x.value)
+  }))
+
+  return { tags, status }
+}
+
+
 
 // mocks post() and get() to not actually write to 
 // permaweb but to an in-memory list.
@@ -69,4 +110,4 @@ function mockArweavePost() {
   }
 }
 
-mockArweavePost()
+// mockArweavePost()
