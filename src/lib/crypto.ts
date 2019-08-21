@@ -67,8 +67,8 @@ export async function decryptData(encrypted: ArrayBuffer, password: string): Pro
 /**
  * Derives a 256bit key from salt and password.
  * 
- * Uses scrypt with N = 2^19  R = 8, P = 1 and follows that 
- * with the browsers PBKDF2 set at 50,000 iterations.
+ * Uses scrypt with N = 2^15  R = 8, P = 3 and follows that 
+ * with the browsers PBKDF2 set at 250,000 iterations.
  *  
  * @param salt 
  * @param password 
@@ -93,7 +93,7 @@ async function deriveKey(salt: Uint8Array, password: string) {
     {
       "name": "PBKDF2",
       salt: salt.slice(12, 20),
-      "iterations": 50000,
+      "iterations": 250000,
       "hash": "SHA-256"
     },
     rawPasswordKey,
@@ -104,15 +104,23 @@ async function deriveKey(salt: Uint8Array, password: string) {
 
 }
 
-
 // Wraps scrypt-async as promise and sets parameters
-// N increased to 2^19
+// N increased to 2^15 (from default of 2^14) and P increased from 1 to 3 
+// Ideally we would increase N more, but this causes clients with low memory to 
+// fail (mobiles), however increasing P from 1 to 3 triples the work needed.  
+
+// Memory requirements for N: 
+// 2^14 : 16MB 
+// 2^15 : 32MB
+// 2^16 : 64MB
+
 function scryptPromise(password: string, salt: Uint8Array): Promise<Uint8Array> {
   
+  // scrypt-async typings are incorrect so we need a few 'as any' 
   return new Promise((res, rej) => {
-    scrpyt(password as any, salt as any, {  N: 524288,
+    scrpyt(password as any, salt as any, {  N: Math.pow(2, 15),
       r: 8,
-      p: 1,
+      p: 3,
       dkLen: 256,
       interruptStep: 200,
       encoding: 'binary'}, (result: any) => {
