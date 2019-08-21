@@ -53,7 +53,6 @@
   justify-content: start;
 }
 
-
 .header-bar {
   flex-grow: 1;
   max-width: 600px;
@@ -69,7 +68,7 @@
 }
 
 .logo-and-byline pre {
-  font-size: 4px;
+  font-size: 5px;
   font-weight: bold;
   color:black;
   padding: 0em;
