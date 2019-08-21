@@ -1,6 +1,6 @@
 <template>
   <div>
-    <article class="markdown-body" v-if="paste.pasteFormat === 'markdown'" v-html="getRenderedMarkdown()"></article>
+    <article class="markdown-body markdown-sanity" v-if="paste.pasteFormat === 'markdown'" v-html="getRenderedMarkdown()"></article>
     <pre v-if="paste.pasteFormat === 'plaintext'">{{ paste.pasteText }}</pre>
   </div>
 </template>
@@ -27,3 +27,11 @@ export default class PasteRender extends Vue {
 }
 
 </script> 
+
+<style scoped>
+.markdown-sanity {
+  max-width: 800px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>

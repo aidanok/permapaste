@@ -6,7 +6,7 @@
         <p>
           You have chosen to post a <b>private</b> paste. This will be saved 
           encrypted and unreadable on the Arweave blockchain unless the user is 
-          given the URL & password.
+          given the link and password.
         </p>
 
         <p>
@@ -37,6 +37,7 @@
       <div class="wallet">
         <wallet-load></wallet-load>
       </div>  
+      
     </div>
 
     
@@ -79,6 +80,9 @@
   display: flex;
   justify-content: space-between;
   padding-top: 0.5em;
+}
+.step-footer button {
+  flex-basis: 50%;
 }
 
 </style>
