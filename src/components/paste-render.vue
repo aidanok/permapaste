@@ -1,8 +1,13 @@
 <template>
   <div>
-    <article class="markdown-body markdown-sanity" v-if="paste.pasteFormat === 'markdown'" v-html="getRenderedMarkdown()"></article>
+    <div v-if="paste.pasteFormat === 'markdown'" class="markdown-body markdown-sanity"  v-html="getRenderedMarkdown()">
+
+    </div>
+    
     <pre v-if="paste.pasteFormat === 'plaintext'">{{ paste.pasteText }}</pre>
+
   </div>
+
 </template>
 
 <script lang="ts">

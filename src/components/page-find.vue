@@ -17,7 +17,7 @@
         </form>
       </section>
 
-      <section> 
+      <section class="search-results-section"> 
 
         <div v-if="searching" class="ld ll results-text"> 
           Searching <br/>
@@ -122,11 +122,6 @@ export default class extends Vue {
     this.routeChanged();
   }
 
-
-  beforeRouteUpdated() {
-    console.log('wtf')
-  }
-
   async searchByWallet() {
     this.searching = true;
     this.searched = 'wallet'
@@ -197,7 +192,7 @@ export default class extends Vue {
   get possibleEncryptedPastes(): ArqlExtraResult[] {
     return this.allTxs.filter(
       tx => tx.tags.length == 0
-    ) 
+    )
   }
 
   get totalResultCount(): number {
@@ -211,23 +206,23 @@ export default class extends Vue {
 .header {
   background: rgba(240,240,210,1);
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 0.5em;
 }
 
 .content {
   max-width: 600px;
   margin-top: 1em;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .search-input-section {
-  margin-bottom: 3rem;
+  margin: 0rem 8px 3rem;
 }
 .search-input-form {
   display: flex;
   align-items: stretch;
-  justify-items: stretch
+  justify-items: stretch;
 }
 .search-input-form input {
   flex-grow: 1
@@ -236,7 +231,9 @@ export default class extends Vue {
   margin-left: 0.15em;
   padding: 0.5em;
 }
-
+.search-results-section {
+  margin: 0px 8px;
+}
 .results-text {
   margin-top: 2em;
   text-align: center;
@@ -255,6 +252,7 @@ export default class extends Vue {
   margin-top: 1.5rem;
   text-align: left;
   padding: 0.3em;
+  margin-top: 1.5em;
 }
 .results-box p {
   margin: 0;

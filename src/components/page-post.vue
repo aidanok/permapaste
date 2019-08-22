@@ -38,31 +38,31 @@
 
 .container {
   display: flex;
-  justify-content: start;
+  justify-content: center;
 }
 
 .container div:nth-child(1) {
-  max-width: 600px;
+  max-width: 800px;
   flex-grow: 1;
 }
 
 .header {
   background:  rgba(240,240,210,1);
   display: flex;
-  justify-content: start;
+  justify-content: center;
   width: 100vw;
 }
 
 .header-bar {
   flex-grow: 1;
-  max-width: 600px;
+  max-width: 800px;
   display: flex;
   align-items: flex-start;
 }
 
 .logo-and-byline {
   flex-grow: 1;
-  max-width: 600px;
+  max-width: 800px;
   padding-left: 0.6rem;
   padding-top: 0.6rem;
 }

@@ -47,14 +47,14 @@ export default class extends Vue {
   max-width: 600px;
   width: 100vw;
 }
-
+h5 {
+  margin: 0px 5px;
+}
 .width-switcher {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin: 1rem 0;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin: 1em 5px 1em;
 }
 .width-switcher label {
   font-size: 0.77em;
@@ -71,14 +71,15 @@ export default class extends Vue {
   margin-right: 5px;
   margin-left: 5px;
 }
-
+.auto-margins {
+  margin-left: auto;
+  margin-right: auto;
+}
 .step-footer {
   display: flex;
   justify-content: space-between;
   padding-top: 0.5em;
-  margin-top: 3em;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin: 3em 5px 5em;
 }
 .step-footer button {
   flex-basis: 50%;
