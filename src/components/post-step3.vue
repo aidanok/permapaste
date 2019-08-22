@@ -4,14 +4,21 @@
         Your paste is pending inclusion in the next block. It will be available at
       </p>
       <a :href="postedLink"> {{ postedLink }}</a> 
+      
+      <!-- Secret URL text --> 
       <p v-if="!wasPublic && wasGeneratedPw">
         This paste has been given a <strong>secret link</strong> to access it (given above). 
         You will not be able to recover this paste if you lose this link. 
       </p>
+
+      <!-- Password protected text -->
       <p v-if="!wasPublic && !wasGeneratedPw"> 
         This paste will need the link & password to unlock it.
-        You can search for the link by the wallet used to post it.
       </p>
+      <p v-if="!wasPublic && !wasGeneratedPw">
+        If don't save the link, you can search for it later by wallet address or block number.
+      </p>
+
       <p v-if="wasPublic">
         This paste is posted publicy.
       </p>
@@ -22,7 +29,7 @@
         Since this a public paste, you can also view the TX directly from any node.
         <br/>
         <br/>
-        <a :href="`https://arweave.net/${txId}`"> {{ `https://arweave.net/${txId}` }} </a> <br/>
+        <a :href="`https://arweave.net/${txId}`"> {{ `https://arweave.net/${txId}` }} </a> 
       </p>
 
     </div>
