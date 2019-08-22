@@ -44,10 +44,9 @@ export async function encryptData(str: string, password: string): Promise<{ encr
 }
 
 /**
- * Decrypt a peice of data given the encypted data, the salt and the password used to encrypt. 
+ * Decrypt a peice of data given the encypted data & password
  * 
  * @param encrypted 
- * @param salt 
  * @param password 
  */
 export async function decryptData(encrypted: ArrayBuffer, password: string): Promise<ArrayBuffer> {
