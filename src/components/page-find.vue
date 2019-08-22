@@ -129,7 +129,7 @@ export default class extends Vue {
 
     const val = Number(this.blockHeight)
 
-    if (Number.isNaN(val)) {
+    if (Number.isNaN(val) || val === 0) {
       this.errors.push('Invalid Block Number')
       this.searching = false;
       return
@@ -159,13 +159,11 @@ export default class extends Vue {
 
   fillTitles() {
     this.publicPastes.forEach(pp => { 
-      console.log(pp.tags)
       pp.title = ( 
         pp.tags.filter(x => x.name === TITLE_TAG).map(x => x.value)[0] 
         || 
         'Untitled'
       )
-
     })
   }
 
