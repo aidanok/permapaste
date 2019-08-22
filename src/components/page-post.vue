@@ -44,13 +44,13 @@
 .container div:nth-child(1) {
   max-width: 600px;
   flex-grow: 1;
-  padding: 5px;
 }
 
 .header {
-  background: rgba(240,240,210,1);
+  background:  rgba(240,240,210,1);
   display: flex;
   justify-content: start;
+  width: 100vw;
 }
 
 .header-bar {

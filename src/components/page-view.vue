@@ -47,6 +47,7 @@
 .paste-render-margin {
   margin: 1rem;
 }
+
 .header {
   display: flex;
   justify-content: flex-end;

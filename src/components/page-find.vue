@@ -47,7 +47,7 @@
               </tr>
               <tr v-for="(result, index) in publicPastes" :key="index">
                 <td> {{ result.status.confirmed.block_height }} </td>
-                <td> <router-link v-bind:to="'/view/' + result.id"> {{ result.id }} </router-link> </td>
+                <td class="tx-td"> <router-link v-bind:to="'/view/' + result.id"> {{ result.id }} </router-link> </td>
                 <td> {{ result.title }} </td>
               </tr>
             </table>
@@ -61,7 +61,7 @@
               </tr>
               <tr v-for="(result, index) in possibleEncryptedPastes" :key="index">
                 <td> {{ result.status.confirmed.block_height }} </td>
-                <td> <router-link v-bind:to="'/view/' + result.id"> {{ result.id }} </router-link> </td>
+                <td class="tx-td"> <router-link v-bind:to="'/view/' + result.id"> {{ result.id }} </router-link> </td>
               </tr>
             </table>
           </div>
@@ -244,6 +244,13 @@ th, td {
   border-bottom: 1px solid #ddd;
   text-align: left;
 }
+.tx-td { 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60px;
+}  
+
 th {
   color: rgb(30, 30, 30);
 }

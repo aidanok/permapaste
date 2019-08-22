@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="step1-content">
     <div class="width-switcher">
       <label for="previewWidthSelect" >Preview Width</label>
       <select id="previewWidthSelect" v-model="previewWidth">
@@ -7,7 +7,7 @@
         <option value="900px">900px (Desktop) </option>
         <option value="800px">800px (Tablet)</option>
         <option value="600px">600px</option>
-        <option value="auto">auto</option>
+        <option value="unset">auto</option>
         <option value="412px">412px (Google Pixel, iPhone Plus)</option>
         <option value="375px">375px (iPhone 6+)</option>
         <option value="360px">360px (Samesung S7-S9)</option>
@@ -37,12 +37,16 @@ import { globalStore } from '../lib'
 @Component
 export default class extends Vue {
   globalStore = globalStore
-  previewWidth = 'auto'
+  previewWidth = 'unset'
 } 
 </script>
 
 <style scoped>
 
+.step1-content {
+  max-width: 600px;
+  width: 100vw;
+}
 
 .width-switcher {
   display: flex;
@@ -62,7 +66,8 @@ export default class extends Vue {
   min-height: 300px;
   border: 1px dashed rgb(0,0,0,0.3);
   scroll-behavior: auto x;
-  overflow: scroll;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .step-footer {

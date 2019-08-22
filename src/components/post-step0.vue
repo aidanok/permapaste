@@ -55,6 +55,10 @@ export default class extends Vue {
   padding-top: 0.5em;
 }
 
+section {
+  padding: 0px 5px;
+}
+
 hr {
   color: rgba(180,180,180, 0.5);
   margin-bottom: 0.73em;

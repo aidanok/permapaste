@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <div>
       <div v-if="editing.paste.pastePrivacy === 'private'">
         
@@ -49,11 +49,15 @@
       </button>
     </div>
     
-  </div>
+  </section>
 
 </template>
 
 <style scoped>
+
+section {
+  padding: 0px 5px;
+}
 
 .password-box {
   display: flex;
