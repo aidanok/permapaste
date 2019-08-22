@@ -6,11 +6,17 @@ import * as ArweaveUtils from 'arweave/web/lib/utils' // for base64url utils
 /**
  * Encrypt a piece of string data, with a given password.  
  * Password will be passed through a key-stretching function
- * Returns the encrypted data and the salt used. 
+ * 
+ * The returned ArrayBuffer is laid out with a 
+ * 20 byte salt value and 20 byte random IV followed 
+ * by the ciphertext
+ * 
+ * _______________________________
+ * 0         20     40
+ * [ SALT ] [ IV ] [ CIPHERTEXT ]
  * 
  * @param str the string to encrypt
- * @param password the password.
- * @param userSalt optional user supplied salt. should be something unique.
+ * @param password the password
  */
 export async function encryptData(str: string, password: string): Promise<{ encrypted: ArrayBuffer }> {
   
@@ -107,7 +113,7 @@ async function deriveKey(salt: Uint8Array, password: string) {
 // Wraps scrypt-async as promise and sets parameters
 // N increased to 2^15 (from default of 2^14) and P increased from 1 to 3 
 // Ideally we would increase N more, but this causes clients with low memory to 
-// fail (mobiles), however increasing P from 1 to 3 triples the work needed.  
+// fail (mobiles). Increasing P from 1 to 3 triples the work needed.  
 
 // Memory requirements for N: 
 // 2^14 : 16MB 

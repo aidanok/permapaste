@@ -62,8 +62,7 @@ export async function postPlaintextPaste(paste: Paste, jwk: any): Promise<PasteC
 
 /**
  * Posts some content encrypted with the given password 
- * Passes the ciphertext as UInt8Array to the arweave api, 
- * Encodes the salt (aslo a UInt8Arrray) as base64url as for tags api.
+ * Passes the ciphertext as UInt8Array to the arweave api
  * 
  * @param paste 
  * @param pasteOptions 
