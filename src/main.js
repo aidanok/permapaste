@@ -100,17 +100,11 @@ Vue.component('perma-paste-logo', PermaPasteLogo)
 Vue.use(VueClipboard);
 const router = new VueRouter({ routes })
 
-/*router.beforeEach((to, from, next) => {
-  if (from.path.substr(0, 6) === '/view/' && to.path.substr(6) !== '/paste') {
-    console.log(from)
-    console.log(to)
-    console.log('redirecting...')
-    //next('/')
-  } else {
-    next()
-  }
+router.beforeEach((to, from, next) => {
+  document.title = 'PermaPaste'
+  next()
 })
-*/
+
 
 
 Vue.use(VueRouter)
