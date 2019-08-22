@@ -1,9 +1,21 @@
 
 import 'babel-polyfill'
 
+
 // Vue base.
+
+// Register vue router hooks with vue-class-component
+import Component from 'vue-class-component'
+Component.registerHooks([
+  'beforeRouteEnter',
+  'beforeRouteLeave',
+  'beforeRouteUpdate' // for vue-router 2.2+
+])
+
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 
 // 3rd party components & css
 
