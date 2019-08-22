@@ -68,7 +68,7 @@ export default class extends Vue {
 .paste-preview {
   min-height: 300px;
   border: 1px dashed rgb(0,0,0,0.3);
-  overflow: scroll;
+  overflow-x: auto;
   margin-right: 5px;
   margin-left: 5px;
 }
