@@ -15,7 +15,7 @@
         </p>
 
         <p>
-          If you do not choose a password, a link will be generated with a secure password embedded <br/>
+          If you do not choose a password, a link will be generated with a secure password embedded<br/>
         </p>
         
         <p class="disclaimer">
@@ -142,7 +142,16 @@ export default class PostStep2 extends Vue {
       try {
         const posted = await globalStore.PasteEditing.postPaste(globalStore.LoadedWallet)
         // make link. 
-        this.postedLink = `${window.location.protocol}//${window.location.host}/#/view/${posted.txId}`
+        const baseUrl = (
+          window.location.href.substr(0, 
+            window.location.href.lastIndexOf(window.location.hash)
+          )
+        )
+        // const sep = baseUrl.endsWith('/') ? '' : '/' 
+        // afaik sep should never be needed
+        const sep = ''
+
+        this.postedLink = `${baseUrl}${sep}#/view/${posted.txId}`
         if (this.wasGeneratedPw) {
           this.postedLink += `/${globalStore.PasteEditing.pasteOptions.password}`
         }
