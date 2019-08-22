@@ -8,12 +8,12 @@
    
       <section class="search-input-section">
         <form class="search-input-form">
-          <input placeholder="Wallet Address" id="walletAddrInput" type=text v-model="walletAddr"/>
-          <button class="secondary-btn" @click="searchByWallet">Search</button>
+          <input :disabled="searching" placeholder="Wallet Address" id="walletAddrInput" type=text v-model="walletAddr"/>
+          <button :disabled="searching" class="secondary-btn" @click="$router.push(`/find?wallet=${walletAddr}&n=${(Math.random() * 1000000).toString().slice(0, 5)}`)">Search</button>
         </form>
         <form class="search-input-form">
-          <input placeholder="Block Number" id="blockInput" type=text v-model="blockHeight"/>
-          <button class="secondary-btn" @click="searchByBlock">Search</button>
+          <input :disabled="searching" placeholder="Block Number" id="blockInput" type=text v-model="blockHeight"/>
+          <button :disabled="searching" class="secondary-btn" @click="$router.push(`/find?block=${blockHeight}&n=${(Math.random() * 1000000).toString().slice(0, 5)}`)">Search</button>
         </form>
       </section>
 
@@ -100,6 +100,33 @@ export default class extends Vue {
 
   errors: string[] = [];
 
+  // This (and the @click handlers) is a hack to have search results linkable.
+  // The N query parameter is just a random number to always
+  // trigger a route change so we can retry on the same block/wallet
+  @Watch('$route')
+  routeChanged() {
+    const query = (this as any).$route.query;
+    if (query.wallet) {
+      this.walletAddr = query.wallet
+      this.blockHeight = ''
+      this.searchByWallet()
+    }
+    if (query.block) {
+      this.blockHeight = query.block; 
+      this.walletAddr = ''
+      this.searchByBlock()
+    }
+  }
+
+  created() {
+    this.routeChanged();
+  }
+
+
+  beforeRouteUpdated() {
+    console.log('wtf')
+  }
+
   async searchByWallet() {
     this.searching = true;
     this.searched = 'wallet'
@@ -120,7 +147,6 @@ export default class extends Vue {
   }
 
   async searchByBlock() {
-    
     this.searching = true
     this.searched = 'block'
     this.allTxs = []
