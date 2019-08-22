@@ -25,6 +25,7 @@
       <button @click="$router.go(-1)" class="secondary-btn">Back to Editing</button>
       <button @click="$router.push('/paste/finalize/')">Finalize</button>
     </div>
+
   </div>
 </template>
 
@@ -53,6 +54,8 @@ export default class extends Vue {
   justify-content: flex-start;
   align-items: center;
   margin: 1rem 0;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 .width-switcher label {
   font-size: 0.77em;
@@ -65,9 +68,9 @@ export default class extends Vue {
 .paste-preview {
   min-height: 300px;
   border: 1px dashed rgb(0,0,0,0.3);
-  scroll-behavior: auto x;
-  margin-left: 5px;
+  overflow: scroll;
   margin-right: 5px;
+  margin-left: 5px;
 }
 
 .step-footer {
@@ -75,6 +78,8 @@ export default class extends Vue {
   justify-content: space-between;
   padding-top: 0.5em;
   margin-top: 3em;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 .step-footer button {
   flex-basis: 50%;

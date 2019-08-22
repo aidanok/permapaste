@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <section>
+  <section>
+    <div>
      <div class="paste-options-super"> 
         <div class="paste-options">
           <div class="paste-format">
@@ -24,11 +24,11 @@
         </div>
         <textarea v-model="editing.paste.pasteText" placeholder="Content..." ></textarea>
       </div>
-    </section>
+    </div>
     <div class="step-footer-0">
       <button @click="$router.push('/paste/preview/')">Preview and Finalize</button>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
