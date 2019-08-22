@@ -3,12 +3,13 @@ import { arweave } from './permaweb'
 import * as ArweaveUtils from 'arweave/web/lib/utils'
 import { encryptData, decryptData } from './crypto'
 
-export const TYPE_TAG = 't_type'
-export const FORMAT_TAG = 't_format' 
-export const SALT_TAG = 't_salt'
+export const TYPE_TAG = 'PermaPasteType'
 export const TYPE_TAG_PUBLIC = 'P'
-export const TYPE_TAG_ENCRYPTED = 'E'
+export const FORMAT_TAG = 'PermaPasteFormat' 
 export const TITLE_TAG = 'Title'
+export const DATE_DD_TAG = "DateDD"
+export const DATE_MM_TAG = "DateMM"
+export const DATE_YYYY_TAG = "DateYYYY" // 4 digit year
 
 export interface Paste {
   pasteTitle: string
@@ -33,16 +34,21 @@ export interface EncryptedPasteContainer {
  * Posts some content with Content-Type text/plain 
  * and additional metadata in tags.
  * 
- * @param paste 
- * @param jwk 
+ * @param paste
+ * @param jwk
  */
 export async function postPlaintextPaste(paste: Paste, jwk: any): Promise<PasteContainer> {
   console.info('Posting plaintext paste')
-  const tx = await arweave.createTransaction({ data: paste.pasteText }, jwk)
   
+  const tx = await arweave.createTransaction({ data: paste.pasteText }, jwk)
+  const time = new Date()
+
   tx.addTag(TYPE_TAG, TYPE_TAG_PUBLIC)
   tx.addTag(TITLE_TAG, paste.pasteTitle)
   tx.addTag(FORMAT_TAG, paste.pasteFormat)
+  tx.addTag(DATE_DD_TAG, time.getDate().toString())
+  tx.addTag(DATE_MM_TAG, time.getMonth().toString())
+  tx.addTag(DATE_YYYY_TAG, time.getFullYear().toString())
   tx.addTag("Content-Type", "text/plain")
   
   await arweave.transactions.sign(tx, jwk)
