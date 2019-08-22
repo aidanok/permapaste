@@ -50,7 +50,6 @@
 .header {
   display: flex;
   justify-content: flex-end;
-  padding: 0em 1em;
 }
 
 p {

@@ -33,7 +33,6 @@
   text-align: center;
   font-size: 0.86em;
   color: rgb(50,50,50);
-  margin: 2rem;
 }
 .posted button {
   padding: 0.5em;

@@ -193,8 +193,9 @@ export default class extends Vue {
 
 .content {
   max-width: 600px;
-  margin-left: 1em;
   margin-top: 1em;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .search-input-section {
   margin-bottom: 3rem;

@@ -24,9 +24,9 @@
     
     <div class="container">
       <div>
-      <transition name="slide-fade" mode="out-in">
-        <router-view></router-view>
-      </transition>
+        <transition name="slide-fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </div>
     </div>
 
@@ -37,7 +37,6 @@
 <style scoped>
 
 .container {
-  margin: 0em 1em;
   display: flex;
   justify-content: start;
 }
@@ -45,6 +44,7 @@
 .container div:nth-child(1) {
   max-width: 600px;
   flex-grow: 1;
+  padding: 5px;
 }
 
 .header {
