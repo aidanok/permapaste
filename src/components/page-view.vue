@@ -9,21 +9,20 @@
     
     <div v-if="loaded && paste">
     
-      <paste-render v-bind:class="{ 'paste-render-margin': paste.pasteFormat === 'markdown' }" :paste="paste"></paste-render>
-     
+      <paste-render :paste="paste"></paste-render>
+  
     </div>
     
     <div class="unlock-screen" v-if="loaded && encrypted && !paste && !unlocking"> 
       <p> This paste is locked </p>
       <input v-on:keyup.enter="unlock" type=password placeholder="Enter password" v-model="password">
-    
     </div>
     
     <div v-if="!loaded && !errors.length" class="ld ll">
       <div class="ld ld-ball ld-bounce">
       </div>
       <p>
-        {{ isPending ? 'TX is pending inclusion in the next block, please wait.' : 'Loading...' }}
+        {{ isPending ? 'TX is pending inclusion in the next block, please wait. This can take some time' : 'Loading...' }}
       </p>
     </div>
 

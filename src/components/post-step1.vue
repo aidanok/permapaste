@@ -37,7 +37,7 @@ import { globalStore } from '../lib'
 @Component
 export default class extends Vue {
   globalStore = globalStore
-  previewWidth = '580px'
+  previewWidth = '600px'
 } 
 </script>
 
@@ -59,13 +59,10 @@ export default class extends Vue {
   font-size: 0.77em;
 }
 .paste-preview {
-  padding: 10px;
   min-height: 300px;
-  min-width: 200px;
   border: 1px dashed rgb(0,0,0,0.3);
   scroll-behavior: auto x;
   overflow: scroll;
- 
 }
 
 .step-footer {
