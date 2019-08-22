@@ -13,17 +13,25 @@
         You can search for the link by the wallet used to post it.
       </p>
       <p v-if="wasPublic">
-        This paste is posted publicy, you can search for it by wallet and anyone can find and read it.
+        This paste is posted publicy.
       </p>
 
       <button class="secondary-btn" @click="$copyText(postedLink)">Copy link</button>
+
+      <p v-if="wasPublic" style="margin-top: 3rem">
+        Since this a public paste, you can also view the TX directly from any node.
+        <br/>
+        <br/>
+        <a :href="`https://arweave.net/${txId}`"> {{ `https://arweave.net/${txId}` }} </a> <br/>
+      </p>
+
     </div>
 </template>
 
 <style scoped>
 .posted {
   text-align: center;
-  font-size: 0.9em;
+  font-size: 0.86em;
   color: rgb(50,50,50);
   margin: 2rem;
 }
@@ -49,6 +57,12 @@ export default class PostFinished extends Vue {
 
   @Prop()
   postedLink!: string
+
+  // only called when wasPublic, will not give txId when its a secret link.
+  get txId(): string {
+    return this.postedLink.substr(this.postedLink.lastIndexOf('/') + 1)
+    
+  }
 }
 
 
