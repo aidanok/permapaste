@@ -3,8 +3,9 @@
     <div class="header">
       
       <perma-paste-logo style="padding-top: 0.4rem; padding-right: 0.3em;"></perma-paste-logo>
+      <edit-paste-link v-if="loaded && paste" :paste="paste"></edit-paste-link>
       <find-pastes-link></find-pastes-link>
-      
+     
     </div>
     
     <div v-if="loaded && paste">

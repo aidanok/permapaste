@@ -25,6 +25,7 @@ import WalletLoad from './components/wallet-load.vue'
 import PasteRender from './components/paste-render.vue'
 import FileLoad from './components/file-load'
 import FindPastesLink from './components/find-pastes-link'
+import EditPasteLink from './components/edit-paste-link'
 import PermaPasteLogo from './components/perma-paste-logo'
 
 // Top level views/pages
@@ -82,6 +83,7 @@ Vue.component('paste-render', PasteRender)
 Vue.component('wallet-load', WalletLoad)
 Vue.component('file-load', FileLoad)
 Vue.component('find-pastes-link', FindPastesLink)
+Vue.component('edit-paste-link', EditPasteLink)
 Vue.component('perma-paste-logo', PermaPasteLogo)
 Vue.use(VueClipboard);
 const router = new VueRouter({ routes })
