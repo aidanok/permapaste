@@ -6,11 +6,10 @@
         <option value="1200px">1200px (Desktop) </option>
         <option value="900px">900px (Desktop) </option>
         <option value="800px">800px (Tablet)</option>
-        <option value="600px">600px</option>
         <option value="unset">auto</option>
         <option value="412px">412px (Google Pixel, iPhone Plus)</option>
         <option value="375px">375px (iPhone 6+)</option>
-        <option value="360px">360px (Samesung S7-S9)</option>
+        <option value="360px">360px (Samsung S7-S9)</option>
         <option value="320px">320px (iPhone 5)</option>
       </select>
     </div>

@@ -13,6 +13,10 @@
           This paste will have no metadata identifying it as an encrypted paste. It will be a data transaction from 
           the given wallet with a sequence of random bytes as the payload.
         </p>
+
+        <p>
+          If you do not choose a password, a link will be generated with a secure password embedded <br/>
+        </p>
         
         <p class="disclaimer">
           <ul>
@@ -25,6 +29,7 @@
            <input autocomplete="new-password" placeholder="Password (Optional)" v-bind:type="pwInputHide ? 'password' : 'text'" v-model="editing.pasteOptions.password"/>
            <button class="secondary-btn" @click="pwInputHide = !pwInputHide">Show</button>
         </div>
+        
       </div>
 
       <div v-else>
