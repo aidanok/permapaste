@@ -1,4 +1,8 @@
 /* Buttons styles start */
+html {
+  font-family: sans-serif;
+}
+
 button {
   display: inline-block;
   border: none;

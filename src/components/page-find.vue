@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%; display: inline-block;">
     <div class="header">
       <perma-paste-logo></perma-paste-logo>
     </div>
@@ -208,6 +208,8 @@ export default class extends Vue {
   display: flex;
   justify-content: flex-start;
   padding: 0.5em;
+  box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.24);
+  border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
 .content {

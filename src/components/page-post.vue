@@ -51,6 +51,8 @@
   display: flex;
   justify-content: center;
   width: 100vw;
+  box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.24);
+  border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
 .header-bar {
@@ -68,7 +70,7 @@
 }
 
 .logo-and-byline pre {
-  font-size: 5px;
+  font-size: 3px;
   font-weight: bold;
   color:black;
   padding: 0em;

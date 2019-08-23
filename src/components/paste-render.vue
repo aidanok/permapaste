@@ -38,6 +38,6 @@ export default class PasteRender extends Vue {
   max-width: 800px; 
   margin-left: auto;
   margin-right: auto;
-  padding: 0.5em;
+  padding: 1rem;
 }
 </style>
