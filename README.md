@@ -13,18 +13,19 @@ Other features
 
 ## Use cases 
 
-- Sharing ascii text or markdown documents with people 
-- Storing private key files, passwords etc on the Arweave blockchain behind strong encryption
-- Edit and work on documents privately before public release
-- Private journal or notepad without storing anything on your own device or cloud providers
-- Publishing e-zines, ascii art or other text based content on the Arweave blockchain
+- Publish public pastes & documents
+- Private notepad 
+- Private sharing of pastes & documents  
+- Publish ascii art, e-zines or text base content on the weave
 
 ## Potential Future Features 
 
 - More content types supported 
 - WSIWYG editor for Markdown or other rich text formats
-- Streamline UX for the different use-cases.
+- Streamline UX for the different use-cases. ( private notepad, public pastes, private sharing )
 - File attachments
+- Reintroduce hightlight.js and support code snippets more explicitly
+- Provide instructions on reproducible build / verifying deployed version mathes the GitHub sources
 
 ## Privacy
 
