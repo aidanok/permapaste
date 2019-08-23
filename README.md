@@ -37,7 +37,7 @@ The password or key is passed through a KDF (key derivation function, or key str
 
 **IMPORTANT**: This makes brute-forcing passwords difficult, but trivial passwords like 12345 or common phrases could still be cracked easily, so **make sure to use a strong & unique password**
 
-For scrypt we use the scrypt-async npm library, due it having zero dependencies and being 
+For scrypt we select the scrypt-async npm library, due it having zero dependencies, being quite widely used, and documented clearly
 
 ## Development
 
