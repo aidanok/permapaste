@@ -8,7 +8,7 @@ Other features
 
 - Permaweb App so the version you use now will always be available. 
 - Lightweight & Mobile friendly
-- Supports GitHub flavour Markdown (v0.29) and code highlighting 
+- Supports GitHub flavour Markdown (v0.29) 
 - Recover and edit previous pastes by searching by wallet address or block number
 
 ## Use cases 
@@ -22,8 +22,9 @@ Other features
 ## Potential Future Features 
 
 - More content types supported 
-- WSIWYG editor for Markdown or and other rich text formats
-- Streamlined UX for the different use-cases.
+- WSIWYG editor for Markdown or other rich text formats
+- Streamline UX for the different use-cases.
+- File attachments
 
 ## Privacy
 
