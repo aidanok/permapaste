@@ -1,5 +1,5 @@
 
-import { arweave } from './permaweb'
+import { arweave } from '../lib/permaweb'
 
 export interface Wallet {
   jwk: object
@@ -16,6 +16,6 @@ export default class LoadedWallet {
     const winstonBalance = await arweave.wallets.getBalance(address)
     const balance = arweave.ar.winstonToAr(winstonBalance)
     this.wallet =  { address, balance, jwk }
-    console.log(`Wallet ${address} loaded succesfully, balance: ${balance}`)
+    console.info(`Wallet ${address} loaded succesfully, balance: ${balance}`)
   }
 }

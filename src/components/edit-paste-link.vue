@@ -48,7 +48,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { Paste } from '../lib/pastes';
-import { globalStore} from '../lib/'
+import { globalStore} from '../app-state'
 
 @Component
 export default class extends Vue {  

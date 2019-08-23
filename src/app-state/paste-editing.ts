@@ -1,6 +1,6 @@
-import { Paste, PasteContainer, postEncryptedPaste, postPlaintextPaste, EncryptedPasteContainer } from "./pastes";
+import { Paste, PasteContainer, postEncryptedPaste, postPlaintextPaste, EncryptedPasteContainer } from "../lib/pastes";
 import LoadedWallet from "./loaded-wallet";
-import { arweave } from "./permaweb";
+import { arweave } from "../lib/permaweb";
 import { TransactionStatusResponse } from "arweave/web/transactions";
 
 export class PasteEditing {

@@ -87,7 +87,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
-import { globalStore } from '../lib'
+import { globalStore } from '../app-state'
 
 
 @Component
