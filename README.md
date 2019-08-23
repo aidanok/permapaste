@@ -23,8 +23,9 @@ Other features
 - Provide instructions on reproducible build / verifying deployed version matches the GitHub sources
 - More content types supported 
 - WSIWYG or otherwise improved editor for Markdown or other rich text formats
+- Password strength checking, basic and against haveibeenpwned database
 - File attachments
-- Reintroduce hightlight.js and support code snippets more explicitly
+- Re-introduce hightlight.js and support code snippets more explicitly
 
 ## Privacy
 
@@ -37,7 +38,7 @@ The password or key is passed through a KDF (key derivation function, or key str
 
 **IMPORTANT**: This makes brute-forcing passwords difficult, but trivial passwords like 12345 or common phrases could still be cracked easily, so **make sure to use a strong & unique password**
 
-For scrypt we select the scrypt-async npm library, due it having zero dependencies, being quite widely used, and documented clearly
+For scrypt we select the scrypt-async npm library, due it having zero dependencies, being quite widely used, and documented clearly for browser use.
 
 ## Development
 
