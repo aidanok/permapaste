@@ -1,11 +1,11 @@
 import marked from 'marked'
-import hljs from 'highlight.js';
+//import hljs from 'highlight.js';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
-  highlight: function(code) {
+  /*highlight: function(code) {
     return hljs.highlightAuto(code).value;
-  },
+  },*/
   pedantic: false,
   gfm: true,
   breaks: false,
