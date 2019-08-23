@@ -1,8 +1,7 @@
 
-
 ## PermaPaste 
 
-Store plain text ascii documents, markdown documents and code snippets on the Arweave Permaweb. Store pastes publicy or encrypted, using a password or secret link to encrypt the page. 
+Store plain text ascii documents, markdown documents on the Arweave Permaweb. Store pastes publicy or encrypted, using a password or secret link to encrypt the page. 
 
 Other features
 
@@ -20,12 +19,12 @@ Other features
 
 ## Potential Future Features 
 
+- Streamline UX for the different use-cases. ( private notepad, public pastes, private sharing )
+- Provide instructions on reproducible build / verifying deployed version matches the GitHub sources
 - More content types supported 
 - WSIWYG or otherwise improved editor for Markdown or other rich text formats
-- Streamline UX for the different use-cases. ( private notepad, public pastes, private sharing )
 - File attachments
 - Reintroduce hightlight.js and support code snippets more explicitly
-- Provide instructions on reproducible build / verifying deployed version mathes the GitHub sources
 
 ## Privacy
 
@@ -38,7 +37,7 @@ The password or key is passed through a KDF (key derivation function, or key str
 
 **IMPORTANT**: This makes brute-forcing passwords difficult, but trivial passwords like 12345 or common phrases could still be cracked easily, so **make sure to use a strong & unique password**
 
-For scrypt we use the scrypt-async npm library, due it having zero dependencies and being well documented.
+For scrypt we use the scrypt-async npm library, due it having zero dependencies and being 
 
 ## Development
 
