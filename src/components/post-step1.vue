@@ -3,7 +3,7 @@
     <div class="width-switcher">
       <label for="previewWidthSelect" >Preview Width</label>
       <select id="previewWidthSelect" v-model="previewWidth">
-        <option value="1200px">1200px (Desktop) </option>
+        <!-- <option value="1200px">1200px (Desktop) </option> -->
         <option value="900px">900px (Desktop) </option>
         <option value="800px">800px (Tablet)</option>
         <option value="unset">auto</option>
@@ -45,16 +45,15 @@ export default class extends Vue {
 
 .step1-content {
   max-width: 600px;
-  width: 100vw;
+  padding-left: 5px;
+  padding-right: 5px;
 }
-h5 {
-  margin: 0px 5px;
-}
+
 .width-switcher {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin: 1em 5px 1em;
+  margin: 1em 0 1em;
 }
 .width-switcher label {
   font-size: 0.77em;
@@ -68,8 +67,9 @@ h5 {
   min-height: 300px;
   border: 1px dashed rgb(0,0,0,0.3);
   overflow-x: auto;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
 }
 .auto-margins {
   margin-left: auto;
@@ -79,7 +79,7 @@ h5 {
   display: flex;
   justify-content: space-between;
   padding-top: 0.5em;
-  margin: 3em 5px 5em;
+  margin: 3em 0px 5em;
 }
 .step-footer button {
   flex-basis: 50%;
