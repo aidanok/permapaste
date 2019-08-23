@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100%; display: inline-block;">
-    <div class="header">
+    <div class="header header-coloring">
       <perma-paste-logo></perma-paste-logo>
     </div>
 
@@ -28,7 +28,7 @@
         <div v-else> 
 
           <p class="results-text" v-if="searched === ''">
-            Search by wallet or by block number to find previous pastes
+            Search by wallet or by block number
           </p>
 
           <p class="results-text" v-if="searched !== '' && errors.length == 0 && totalResultCount > 0" >
@@ -204,10 +204,15 @@ export default class extends Vue {
 
 <style scoped>
 .header {
-  background: rgba(240,240,210,1);
+ 
   display: flex;
   justify-content: flex-start;
   padding: 0.5em;
+  
+}
+
+.header-coloring {
+  background: rgba(240,240,210,1);
   box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.24);
   border-bottom: 1px solid rgba(0,0,0,0.15);
 }

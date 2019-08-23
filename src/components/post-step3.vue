@@ -1,13 +1,14 @@
 <template>
    <div class="posted"> 
       <p>
-        Your paste is pending inclusion in the next block. It will be available at
+        Your paste is pending inclusion in the next block.
       </p>
       <a :href="postedLink"> {{ postedLink }}</a> 
       
       <!-- Secret URL text --> 
       <p v-if="!wasPublic && wasGeneratedPw">
         This paste has been given a <strong>secret link</strong> to access it (given above). 
+        <br/>
         You will not be able to recover this paste if you lose this link. 
       </p>
 
