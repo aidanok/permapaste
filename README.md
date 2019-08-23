@@ -21,7 +21,7 @@ Other features
 ## Potential Future Features 
 
 - More content types supported 
-- WSIWYG editor for Markdown or other rich text formats
+- WSIWYG or otherwise improved editor for Markdown or other rich text formats
 - Streamline UX for the different use-cases. ( private notepad, public pastes, private sharing )
 - File attachments
 - Reintroduce hightlight.js and support code snippets more explicitly
