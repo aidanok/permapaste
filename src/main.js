@@ -48,6 +48,7 @@ import PageFind from './components/page-find.vue'
 
 import PostStep0 from './components/post-step0.vue'
 import PostStep1 from './components/post-step1.vue'
+import PostStep1Alt from './components/post-step1alt.vue'
 import PostStep2 from './components/post-step2.vue'
 import PostStep3 from './components/post-step3.vue'
 
@@ -57,7 +58,7 @@ const routes = [
     path: '/paste', component: PagePost, 
     children: [ 
       { path: 'edit', component: PostStep0 },
-      { path: 'preview', component: PostStep1 },
+      { path: 'preview', component: PostStep1Alt },
       { path: 'finalize', component: PostStep2 },
       { path: 'finished', component: PostStep3, 
         props: (route) => {
@@ -98,7 +99,13 @@ Vue.component('find-pastes-link', FindPastesLink)
 Vue.component('edit-paste-link', EditPasteLink)
 Vue.component('perma-paste-logo', PermaPasteLogo)
 Vue.use(VueClipboard);
-const router = new VueRouter({ routes })
+
+const router = new VueRouter({ 
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  }
+})
 
 router.beforeEach((to, from, next) => {
   document.title = 'PermaPaste'
