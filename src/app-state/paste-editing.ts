@@ -8,17 +8,16 @@ export class PasteEditing {
   paste: Paste = {
     pasteTitle: '',
     pasteText: '',
-    pasteFormat: 'plaintext',
+    pasteFormat: 'markdown',
     pastePrivacy: 'public'
   }
 
   pasteOptions = {
     password: '',
-    customUrl: '',
   }
 
   // Pastes that are pending for the next block, most recent first
-  // UNUSED
+  // UNUSED. 
   pendingPaste: PasteContainer | EncryptedPasteContainer | null = null;
  
   public reset(): void {
@@ -28,9 +27,9 @@ export class PasteEditing {
       pasteFormat: 'plaintext',
       pastePrivacy: 'public'
     }
+
     this.pasteOptions = {
       password: '',
-      customUrl: ''
     }
   }
 
