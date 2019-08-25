@@ -15,7 +15,7 @@ export interface Paste {
   pasteTitle: string
   pasteText: string
   pasteFormat: 'markdown' | 'plaintext'
-  pastePrivacy: 'public' | 'private'
+  pastePrivacy: 'public' | 'secretpass' | 'secretlink'
 }
 
 export interface PasteContainer {
