@@ -30,7 +30,7 @@
 .card {
   display: block;
   width: 90%;
-  max-width: 400px;
+  max-width: 600px;
   margin: 1rem;
   border-radius: 5px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
@@ -38,14 +38,7 @@
   transition: height 0.56s;
   will-change: height;
 }
-.card button {
-  font-size: 0.85em;
-  display: block;
-  width: 100%;
-}
-.card button:active {
-  transform: unset;
-}
+
 /* Works but for consistency with other buttons disabled */
 /*.card button:active {
   outline: none;
@@ -72,13 +65,26 @@
   line-height: 100%;
   transition: color 0.45s;
 }
+
 .selected-card {
-  border: 2px solid rgba(14, 148, 23, 0.885);
+  border: 2px solid rgba(142, 141, 238, 0.885);
   /*box-shadow: 0 0 1.6em 1px rgba(47, 27, 219, 0.363); */
 }
-.selected-card button {
-  background: rgba(80, 110, 140, 1);
+
+/** Card buttons */
+.card button {
+  font-size: 0.85em;
+  display: block;
+  width: 100%;
+  background: rgb(173, 182, 174);
 }
+.card button:active {
+  transform: unset;
+}
+.selected-card button {
+  background: rgb(80, 110, 140, 1);
+ }
+
 .selected-card p {
   background: white;
   color: #222;
@@ -95,7 +101,7 @@
   padding-top: 0.5em;
   margin: 3em auto 0 auto;
   width: 90%;
-  max-width: 400px;
+  max-width: 600px;
 }
 
 .step-footer button {
@@ -111,6 +117,12 @@
   margin: 3px;
 }
 
+.wallet-load {
+  width: 90%;
+  max-width: 600px;
+  border: 1px dashed #ccc;
+}
+
 </style>
 
 <template>
@@ -118,7 +130,7 @@
     
     <div class="select-section">
       
-      Select the Privacy Setting
+      <p> Select Privacy Setting </p>
       
       <div class="card" v-bind:class="{ 'selected-card': selected === 'public'}">
         <button @click="select($event, 'public')"> 
@@ -153,7 +165,6 @@
           When the link is lost, access will be lost. 
         </p>
       </div>
-
       
     </div>
 

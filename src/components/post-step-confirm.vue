@@ -13,10 +13,6 @@
           This paste will have no metadata identifying it as an encrypted paste. It will be a data transaction from 
           the given wallet with a sequence of random bytes as the payload.
         </p>
-
-        <p>
-          If you do not choose a password, a link will be generated with a secure password embedded<br/>
-        </p>
         
         <p class="disclaimer">
           <ul>
@@ -24,17 +20,12 @@
             <li>This post is not anonymous! It can be tracked to the wallet and IP you used to post it </li>
           </ul>
         </p>
-        
-        <div class="password-box">
-           <input autocomplete="new-password" placeholder="Password (Optional)" v-bind:type="pwInputHide ? 'password' : 'text'" v-model="editing.pasteOptions.password"/>
-           <button class="secondary-btn" @click="pwInputHide = !pwInputHide">Show</button>
-        </div>
-        
+      
       </div>
 
       <div v-else>
         <p>
-        You have chosen to post a <b>public</b> paste. This will be saved
+        You have chosen to post a <b>public</b> paste. This will be saved 
         on the Arweave blockchain and accessible to anyone.      
         </p>
       </div>
@@ -63,27 +54,24 @@
 section {
   padding: 0px 5px;
 }
-
 .password-box {
   display: flex;
   justify-content: center;
   justify-items: center;
 }
-
 .password-box button {
   padding: 0.5em;
 }
-
 .disclaimer {
   font-size: 0.76em;
   color: rgb(70, 5, 5, 1);
   background-color: rgb(240, 50, 50, 0.3);
-  border-radius: 4px;
+  border-radius: 1.0em;
   padding: 0.7em;
   line-height: 1.6em;
 }
 .wallet {
-  padding: 0em 0em;
+  border: 1px dashed #ccc;
 }
 .step-footer {
   display: flex;
