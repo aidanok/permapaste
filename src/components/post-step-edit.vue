@@ -22,11 +22,12 @@
   border-radius: 3px;
   padding: 2px;
   align-self: flex-end;
+  flex-grow: 0;
+  flex-shrink: 0;
   width: 20em;
   margin-top: 0.3em;
   border: 0px solid red;
 }
-
 .select-format > label {
   /*display: block;*/
   font-size: 1em;
@@ -38,7 +39,6 @@
   padding: 0.1em;
   background: none;
 }
-
 .title-input {
   align-self: flex-end;
   margin-top: 0.3em;
@@ -46,12 +46,10 @@
   border: 1px solid #aaa;
   padding: 3px;
 }
-
 .editor {
   margin-top: 0.5em;
   flex-grow: 1;
 }
-
 .step-footer-0 {
   flex-shrink: 0;
   flex-grow: 0;
@@ -59,9 +57,9 @@
   justify-content: flex-end;
   padding: 2px 0px;
 }
-
-
-
+.step-footer-0 button {
+  width: 17rem;
+}
 </style>
 <template>
 
@@ -99,6 +97,8 @@ import { globalStore } from '../app-state'
 export default class extends Vue {
     editing = globalStore.PasteEditing
     preview = false;
+
+    
 }
 
 </script>

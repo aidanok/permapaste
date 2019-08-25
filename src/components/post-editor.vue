@@ -1,18 +1,14 @@
 <style scoped>
-
 .paste-text-editor-content {
   border: 1px solid #aaa;
   display: flex;
   flex-direction: column; 
 }
-
 .full-screen-height {
   height: calc(100vh - 2px);
 }
-
 .paste-textarea {
   flex-grow: 1;
-  flex-basis: 100%;
   flex-shrink: 1;
   white-space: pre;
   overflow: auto;
@@ -25,14 +21,19 @@
 .paste-text-editor-button-bar {
   display: flex;
   justify-content: flex-end;
+  align-content: center;
+  flex-shrink: 0;
+  flex-grow: 0;
 }
 .paste-text-editor-button-bar > button {
   padding: 0.3em;
-  display: block;
+  display: inline-block;
   width: 7em;
   border-top: 0px;
   border-bottom: 0px;
   border-right: 0;
+  align-self: stretch;
+  flex-shrink: 0;
   /*height: 1em;*/
   /*transform: translateY(calc(2em + 2px));*/
 }
@@ -47,16 +48,34 @@
 }
 .preview-window {
   border-top: 1px solid #aaa;
+  overflow: auto;
+  flex-grow: 1;
+}
+.markdown-textarea {
+  white-space: pre-wrap;
 }
 </style>
 
 <template>
-  <div class="paste-text-editor-content" v-bind:class="{ 'full-screen-height': fullScreenMode, 'hide-border': previewing && fullScreenMode }">
-    <div v-bind:class="{ hide: previewing && fullScreenMode }" class="paste-text-editor-button-bar">
+  <div 
+    class="paste-text-editor-content" 
+    v-bind:class="{ 'full-screen-height': fullScreenMode, 'hide-border': previewing && fullScreenMode }">
+    
+    <div 
+      class="paste-text-editor-button-bar"
+      v-bind:class="{ hide: previewing && fullScreenMode }">
+
       <button v-bind:class="{ hide: fullScreenMode }" class="secondary-btn" @click="fullScreenToggle"> Full-screen </button> 
       <button class="secondary-btn" @click="previewToggle">{{ previewToggleText }}</button>
     </div>
-    <textarea ref="mainTextArea" v-bind:class="{ 'hide': previewing } " class="paste-textarea" v-model="editing.paste.pasteText" placeholder="" ></textarea>
+
+    <textarea 
+      ref="mainTextArea" 
+      class="paste-textarea"
+      v-model="editing.paste.pasteText"
+      v-bind:class="{ 'hide': previewing, 'markdown-textarea': editing.paste.pasteFormat === 'markdown' } " 
+      placeholder="">
+      </textarea>
     <paste-render v-if="previewing" class="preview-window" :paste="editing.paste"></paste-render>
   </div>
 </template>
@@ -81,7 +100,7 @@ export default class extends Vue {
 
   fullScreenToggle() {
     if (this.fullScreenMode) {
-      (this as any).$router.go(-1)
+      (this as any).$router.relace({ path: '/paste/edit' })
     } else {
       (this as any).$router.push({ path: '/paste/edit-fullscreen',  props: { fullScreenMode: true } })
     }
@@ -130,12 +149,8 @@ export default class extends Vue {
       
     }
   }
-  @Watch('previewing')
-  watchPreviewing(val: boolean) {
-    if (!val) {
-      (this as any).$refs.mainTextArea.focus();
-    }
-  }
+
+  
 }
 
 </script>
