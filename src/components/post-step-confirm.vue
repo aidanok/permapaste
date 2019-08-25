@@ -1,7 +1,7 @@
 <template>
   <section>
     <div>
-      <div v-if="editing.paste.pastePrivacy === 'private'">
+      <div v-if="editing.paste.pastePrivacy !== 'public'">
         
         <p>
           You have chosen to post a <b>private</b> paste. This will be saved 
@@ -47,7 +47,7 @@
 
     
     <div class="step-footer">
-      <button @click="$router.go(-2)" class="secondary-btn">Back to Editing</button>
+      <button @click="$router.replace('/paste/edit/')" class="secondary-btn">Back to Editing</button>
       <button @click="tryPost" class="ld-ext-right" v-bind:class="{ running: posting }">
         Post to Permaweb
         <div style="color: coral" class="ld ld-ball ld-bounce"></div>
@@ -125,7 +125,7 @@ export default class PostStep2 extends Vue {
     this.error = []
     
     // Generate a password if none given, it will be appended to the url.
-    if (this.editing.paste.pastePrivacy === 'private' && !this.editing.pasteOptions.password) {
+    if (this.editing.paste.pastePrivacy !== 'public' && !this.editing.pasteOptions.password) {
       this.editing.pasteOptions.password = generateRandomStrongPassword()
       this.wasGeneratedPw = true;
     }

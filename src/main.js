@@ -46,21 +46,24 @@ import PagePost from './components/page-post.vue'
 import PageView from './components/page-view.vue'
 import PageFind from './components/page-find.vue'
 
-import PostStep0 from './components/post-step0.vue'
-import PostStep1 from './components/post-step1.vue'
-import PostStep1Alt from './components/post-step1alt.vue'
-import PostStep2 from './components/post-step2.vue'
-import PostStep3 from './components/post-step3.vue'
+import PostStepEdit from './components/post-step-edit.vue'
+import PostStepPrivacy from './components/post-step-privacy.vue'
+import PostPreview from './components/post-preview.vue'
+import PostEditor from './components/post-editor.vue'
+import PostStepConfirm from './components/post-step-confirm.vue'
+import PostStepFinished from './components/post-step-finished.vue'
 
 const routes = [
   { path: '/', redirect: '/paste/edit' },
+  { path: '/paste/preview', component: PostPreview },
+  { path: '/paste/edit-fullscreen', component: PostEditor, props: { fullScreenMode: true } },
   { 
     path: '/paste', component: PagePost, 
     children: [ 
-      { path: 'edit', component: PostStep0 },
-      { path: 'preview', component: PostStep1Alt },
-      { path: 'finalize', component: PostStep2 },
-      { path: 'finished', component: PostStep3, 
+      { path: 'edit', component: PostStepEdit },
+      { path: 'privacy', component: PostStepPrivacy },
+      { path: 'finalize', component: PostStepConfirm },
+      { path: 'finished', component: PostStepFinished, 
         props: (route) => {
           console.log(route.query)
           const props = { 
@@ -93,6 +96,7 @@ const routes = [
 
 
 Vue.component('paste-render', PasteRender)
+Vue.component('paste-editor', PostEditor)
 Vue.component('wallet-load', WalletLoad)
 Vue.component('file-load', FileLoad)
 Vue.component('find-pastes-link', FindPastesLink)
@@ -111,8 +115,6 @@ router.beforeEach((to, from, next) => {
   document.title = 'PermaPaste'
   next()
 })
-
-
 
 Vue.use(VueRouter)
 

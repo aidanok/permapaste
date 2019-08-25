@@ -1,11 +1,50 @@
+
+<style scoped> 
+  /** Auto height & width so we get whole page scrolling */
+  .page-layout {
+    display: grid; 
+    grid-template-columns: 1fr minmax(auto, 800px) 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .grid-place-header {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+  }
+  .grid-place-content {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+
+  /* Move to global? */
+  .header {
+    padding: 0.5em;
+  }
+
+  /* Move to global */
+  .header-coloring {
+    background: #f0f0d2;
+    box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.24);
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+  }
+
+  /* Move to global and rename? */
+  .content {
+    padding: 0px 5px;
+    /* We can get internal scrolling by disabling this and setting height & width on page-layout */
+    /* overflow-y: auto; */ 
+  }
+
+</style>
+
 <template>
-  <div style="width: 100%; display: inline-block;">
-    <div class="header header-coloring">
+  <div class="page-layout">
+    
+    <div class="grid-place-header header header-coloring">
       <perma-paste-logo></perma-paste-logo>
     </div>
 
-    <div class="content">
-   
+    <div class="grid-place-content content">
+  
       <section class="search-input-section">
         <form class="search-input-form">
           <input :disabled="searching" placeholder="Wallet Address" id="walletAddrInput" type=text v-model="walletAddr"/>
@@ -203,28 +242,11 @@ export default class extends Vue {
 </script>
 
 <style scoped>
-.header {
- 
-  display: flex;
-  justify-content: flex-start;
-  padding: 0.5em;
-  
-}
 
-.header-coloring {
-  background: rgba(240,240,210,1);
-  box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.24);
-  border-bottom: 1px solid rgba(0,0,0,0.15);
-}
+/* Internal content styles */
 
-.content {
-  max-width: 600px;
-  margin-top: 1em;
-  margin-left: auto;
-  margin-right: auto;
-}
 .search-input-section {
-  margin: 0rem 8px 3rem;
+  padding-top: 1rem;
 }
 .search-input-form {
   display: flex;
@@ -232,15 +254,13 @@ export default class extends Vue {
   justify-items: stretch;
 }
 .search-input-form input {
-  flex-grow: 1
+  flex-grow: 1;
 }
 .search-input-form button {
   margin-left: 0.15em;
   padding: 0.5em;
 }
-.search-results-section {
-  margin: 0px 8px;
-}
+
 .results-text {
   margin-top: 2em;
   text-align: center;
@@ -253,6 +273,8 @@ export default class extends Vue {
   color: rgb(233, 1, 1);
   padding: 0.7em;
   line-height: 1.6em;
+  border: 1px dashed rgb(243, 100, 100, 1);
+  border-radius: 1rem;
 }
 .results-box {
   font-size: 0.9em;
@@ -275,6 +297,7 @@ th, td {
   border-bottom: 1px solid #ddd;
   text-align: left;
 }
+
 .tx-td { 
   overflow: hidden;
   text-overflow: ellipsis;

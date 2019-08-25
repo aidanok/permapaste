@@ -1,5 +1,5 @@
 <template>
-     <router-link to="/" class="perma-paste-logo">
+     <router-link to="/" replace class="perma-paste-logo">
        <div>
         <span>Perma</span><span>Paste</span>
        </div>
