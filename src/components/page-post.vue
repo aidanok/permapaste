@@ -6,6 +6,7 @@
   grid-template-rows: auto 1fr;
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
 }
 .grid-place-header {
   grid-column: 1 / 4;
@@ -23,7 +24,7 @@
 <template>
   <div class="page-layout">
     
-    <div class="grid-place-header header">
+    <div class="grid-place-header header header-coloring">
     </div>
     
     <div class="grid-place-header-center header-bar">
@@ -58,14 +59,10 @@
 
 <style scoped>
 
-
-
 .header {
-  background:  rgb(210, 228, 240);
   display: flex;
   justify-content: center;
-  box-shadow: inset 0 1px 3px -1px rgba(0,0,0,0.24);
-  border-bottom: 1px solid rgba(0,0,0,0.15);
+  
 }
 
 .header-bar {
@@ -77,10 +74,12 @@
 .logo-and-byline {
   flex-grow: 1;
   max-width: 800px;
-  padding-left: 0.6rem;
-  padding-top: 0.6rem;
+  padding: 0.5em;
+  /*padding-left: 0.5rem;
+  padding-top: 0.5rem;*/
 }
 .logo-and-byline pre {
+  display: none;
   font-size: 3px;
   line-height: 4px;
   font-weight: bold;
