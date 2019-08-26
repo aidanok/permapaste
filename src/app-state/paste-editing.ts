@@ -48,7 +48,7 @@ export class PasteEditing {
     this.paste = {
       pasteTitle: '',
       pasteText: defaultMarkdown,
-      pasteFormat: 'plaintext',
+      pasteFormat: 'markdown',
       pastePrivacy: 'secretpass'
     }
 
