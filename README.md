@@ -44,7 +44,8 @@ generated 224bit value that is passed in the URL.
 
 The password or key is passed through a KDF (key derivation function, or key stretching function) with a unique salt to make brute force attacks impractical. The KDF used is `PBKDF2(scrypt(PASSWORD))` with R=2^16, P=2 for scrypt and 250,000 iterations of PBKDF2. 
 
-These KDF parameters were selected after consulting https://keybase.io/warp/ & https://blog.filippo.io/the-scrypt-parameters/   
+The KDF and parameters were selected after consulting https://keybase.io/warp/ & https://blog.filippo.io/the-scrypt-parameters/   
+
 **All encryption and decryption is done client side in the browser** Your password or content never leaves your machine and only encrypted data is transmitted over the network to be stored or retrieved by the Arweave blockchain
 
 **IMPORTANT**: This makes brute-forcing passwords difficult, but trivial passwords like 12345 or common phrases could still be cracked easily, so **make sure to use a strong & unique password**
