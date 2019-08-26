@@ -57,6 +57,14 @@ export class PasteEditing {
     }
   }
 
+  isDefaultText(): boolean {
+    return (
+      (this.paste.pasteFormat === 'markdown' && this.paste.pasteText === defaultMarkdown)
+      || 
+      (this.paste.pasteFormat === 'plaintext' && this.paste.pasteText === '')
+    )
+  }
+
   get isNonEmptyPaste(): boolean {
     return this.paste.pasteText !== ''
   }
@@ -64,6 +72,8 @@ export class PasteEditing {
   get isPasswordOk() {
     return this.paste.pastePrivacy === 'public' || this.pasteOptions.password.length >= 7;
   }
+
+  
 
   public async postPaste(loadedWallet: LoadedWallet) {
     if (!loadedWallet.wallet) {
