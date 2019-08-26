@@ -1,5 +1,5 @@
 {
-    "name": "PermaPaste 1.0.0",
+    "name": "PermaPaste",
     "short_name": "PermaPaste",
     "start_url": "/",
     "icons": [
@@ -9,7 +9,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#fbffad",
+    "theme_color": "#64828c",
     "background_color": "#fbffad",
-    "display": "minimal-ui"
+    "display": "standalone"
 }
