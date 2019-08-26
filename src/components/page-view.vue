@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header">
+    <div class="header" v-if="!noFrame">
       
       <perma-paste-logo style="padding-top: 0.4rem; padding-right: 0.3em;"></perma-paste-logo>
       <edit-paste-link v-if="loaded && paste" :paste="paste"></edit-paste-link>
@@ -102,7 +102,12 @@ export default class extends Vue {
   @Prop() 
   urlPassword!: string  
 
+  noFrame = false;
+
   created() {
+    const query = (this as any).$route.query; 
+    console.log(query)
+    this.noFrame = query && query.noframe !== undefined;
     this.loadPaste(this.txId)
   }
 
