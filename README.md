@@ -52,7 +52,7 @@ The KDF and parameters were selected with influence from https://keybase.io/warp
 
 **IMPORTANT**: This makes brute-forcing passwords difficult, but trivial passwords like 12345 or common phrases could still be cracked easily, so **make sure to use a strong & unique password**
 
-For scrypt we select the scrypt-async npm library, due it having zero dependencies, being quite widely used, and documented clearly for browser use.
+For scrypt we select the [scrypt-async](https://github.com/dchest/scrypt-async-js) npm library, due it having zero dependencies, being quite widely used, and documented clearly for browser use.
 
 ## Development
 
