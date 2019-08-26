@@ -3,13 +3,37 @@ import LoadedWallet from "./loaded-wallet";
 import { arweave } from "../lib/permaweb";
 import { TransactionStatusResponse } from "arweave/web/transactions";
 
+
+const defaultMarkdown = 
+`Markdown Document
+====================
+
+This would be an intro paragraph with a H1 header
+
+Another section
+---------------
+
+- GitHub Flavored Markdown 
+- Simple and quick
+
+**Replace** this __content__ with your *own!* 
+
+1. One
+2. Two
+3. Three
+
+> Go ! - *template text 2019*
+
+\`console.log('done');\`
+`
+
 export class PasteEditing {
   
   paste: Paste = {
     pasteTitle: '',
-    pasteText: '',
+    pasteText: defaultMarkdown,
     pasteFormat: 'markdown',
-    pastePrivacy: 'public'
+    pastePrivacy: 'secretpass'
   }
 
   pasteOptions = {
@@ -23,9 +47,9 @@ export class PasteEditing {
   public reset(): void {
     this.paste = {
       pasteTitle: '',
-      pasteText: '',
+      pasteText: defaultMarkdown,
       pasteFormat: 'plaintext',
-      pastePrivacy: 'public'
+      pastePrivacy: 'secretpass'
     }
 
     this.pasteOptions = {

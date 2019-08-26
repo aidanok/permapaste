@@ -41,6 +41,8 @@
   text-align: center;
   font-size: 0.86em;
   color: rgb(50,50,50);
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .posted button {
   padding: 0.5em;

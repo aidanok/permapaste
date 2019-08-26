@@ -10,7 +10,10 @@
 .paste-textarea {
   flex-grow: 1;
   flex-shrink: 1;
+  
   white-space: pre;
+  font-family: monospace;
+  
   overflow: auto;
   resize: none;
   width: 100%;
@@ -143,9 +146,9 @@ export default class extends Vue {
     // were actually focused on some other element (like the title input ) before hitting preview, 
     // in that case we still focus on the main text area when we come out of preview.
     if (!this.previewing) {
-      setTimeout(() => {
+      /*setTimeout(() => {
         (this as any).$refs.mainTextArea.focus();
-      }, 0);
+      }, 0);*/
       
     }
   }
