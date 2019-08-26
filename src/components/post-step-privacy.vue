@@ -59,13 +59,13 @@
   will-change: height;
 }
 
-.card span {
+.card button .tick {
   float: right;
   color: rgba(255,255,255,0); 
   line-height: 100%;
   transition: color 0.45s;
 }
-.card span::after {
+.card button .tick::after {
   content: "\2713"; /* Tick symbol */
 }
 
@@ -94,7 +94,8 @@
   height: initial;
   padding: 16px 10px;
 }
-.selected-card span {
+
+.selected-card button .tick {
   color: rgba(255,255,255,1)
 }
 
@@ -126,7 +127,7 @@
   padding: 0.7em;
   margin: 0.5em;
 }
-.password-input button::after {
+.password-input button .eyeball::after {
   content: "\01F441";
 }
 
@@ -149,7 +150,7 @@
       <div class="card" v-bind:class="{ 'selected-card': selected === 'public'}">
         <button @click="select($event, 'public')"> 
           Public 
-          <span></span>
+          <span class="tick"></span>
         </button>
         <p> Paste will be readable by anyone </p>
       </div>
@@ -157,26 +158,36 @@
       <div class="card" v-bind:class="{ 'selected-card': selected === 'secretpass'}">
         <button @click="select($event, 'secretpass')"> 
           Encrypt with password 
-          <span></span>
+          <span class="tick"></span>
         </button>
         <p> 
-          Paste will need to be unlocked with a password.
+          Paste will need to be unlocked with a password. This is 
+          good for keeping documents private to yourself.
+          You can search for them later by wallet address or block number to edit and save a new version. 
+          <br/>
+          <br/>
+          <b>Make sure to use a strong passphrase!</b>
         </p>
         <p class="password-input">
-          <input autocomplete="new-password" placeholder="Enter a strong password" v-model="editing.pasteOptions.password" v-bind:type="pwVisible ? 'text': 'password'"/>
-          <button class="secondary-btn" @click="pwVisible = !pwVisible"></button>
+          <input autocomplete="new-password" placeholder="Enter a strong passphrase" v-model="editing.pasteOptions.password" v-bind:type="pwVisible ? 'text': 'password'"/>
+          <button class="secondary-btn" @click="pwVisible = !pwVisible"><span class="eyeball"></span></button>
         </p>
       </div>
 
       <div class="card" v-bind:class="{ 'selected-card': selected === 'secretlink'}">
         <button @click="select($event, 'secretlink')"> 
           Encrypt with secret link
-          <span></span>
+          <span class="tick"></span>
         </button>
         <p> 
           Paste can be read by anyone who has the link. 
           <br/>
           When the link is lost, access will be lost. 
+          <br/>
+          This is good for sharing documents with one or more people privately. 
+          <br/>
+          <br/>
+          <span style="font-style: italic">If this link is leaked, anyone can get access to the document. </span>
         </p>
       </div>
       

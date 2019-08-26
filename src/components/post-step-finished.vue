@@ -9,6 +9,7 @@
       <p v-if="!wasPublic && wasGeneratedPw">
         This paste has been given a <strong>secret link</strong> to access it (given above). 
         <br/>
+        <br/>
         You will not be able to recover this paste if you lose this link. 
       </p>
 
