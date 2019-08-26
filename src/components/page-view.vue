@@ -179,7 +179,7 @@ export default class extends Vue {
       // setTimeout so UI can update before the (synchronous) alert box comes up
       setTimeout(() => {
         window.alert(this.errors.join('\n'))
-      }, 0)
+      }, 40)
     }
   }
 
