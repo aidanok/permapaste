@@ -70,9 +70,7 @@ section {
   padding: 0.7em;
   line-height: 1.6em;
 }
-.wallet {
-  border: 1px dashed #ccc;
-}
+
 .step-footer {
   display: flex;
   justify-content: space-between;

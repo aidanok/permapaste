@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     
     <div v-if="!walletMgr.wallet">
     
@@ -23,21 +23,26 @@
 </template>
 
 <style scoped>
-
+.content {
+  text-align: center;
+}
 .input-container {
   display: flex;
   padding: 0em;
   margin-bottom: 1em;
   align-items: center;
   min-height: 6rem;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .wallet-loaded {
+  display: inline-block;
+  text-align: left;
   font-size: smaller;
-  margin-bottom: 1em;
+  margin: 0 auto 1em;
   min-height: 6rem;
 }
+
 
 .wallet-loaded span {
   font-size: smaller;
