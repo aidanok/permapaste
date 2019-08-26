@@ -65,6 +65,9 @@
   line-height: 100%;
   transition: color 0.45s;
 }
+.card span::after {
+  content: "\2713"; /* Tick symbol */
+}
 
 .selected-card {
   border: 2px solid rgba(142, 141, 238, 0.885);
@@ -108,14 +111,25 @@
   flex-basis: 50%;
 }
 
+.password-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .password-input button {
   display: unset;
   width: unset; 
   background: rgba(0,0,0,0); 
-  border: 1px rgb(138,138,138);
-  padding: 3px;
-  margin: 3px;
+  border: 1px solid rgba(138,138,138, 0.25);
+  border-radius: 1em;
+  padding: 0.7em;
+  margin: 0.5em;
 }
+.password-input button::after {
+  content: "\01F441";
+}
+
 
 .wallet-load {
   width: 90%;
@@ -135,7 +149,7 @@
       <div class="card" v-bind:class="{ 'selected-card': selected === 'public'}">
         <button @click="select($event, 'public')"> 
           Public 
-          <span>&#10003;</span>
+          <span></span>
         </button>
         <p> Paste will be readable by anyone </p>
       </div>
@@ -143,21 +157,21 @@
       <div class="card" v-bind:class="{ 'selected-card': selected === 'secretpass'}">
         <button @click="select($event, 'secretpass')"> 
           Encrypt with password 
-          <span>&#10003;</span>
+          <span></span>
         </button>
         <p> 
           Paste will need to be unlocked with a password.
         </p>
         <p class="password-input">
           <input autocomplete="new-password" placeholder="Enter a strong password" v-model="editing.pasteOptions.password" v-bind:type="pwVisible ? 'text': 'password'"/>
-          <button class="secondary-btn" @click="pwVisible = !pwVisible">&#128065;</button>
+          <button class="secondary-btn" @click="pwVisible = !pwVisible"></button>
         </p>
       </div>
 
       <div class="card" v-bind:class="{ 'selected-card': selected === 'secretlink'}">
         <button @click="select($event, 'secretlink')"> 
           Encrypt with secret link
-          <span>&#10003;</span>
+          <span></span>
         </button>
         <p> 
           Paste can be read by anyone who has the link. 
