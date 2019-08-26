@@ -2,10 +2,9 @@
 /* Specify height and width to 100% of viewport */
 .page-layout {
   display: grid; 
-  grid-template-columns: 1fr minmax(auto, 800px) 1fr;
+  grid-template-columns: 1fr minmax(100px, 800px) 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
-  width: 100vw;
   overflow-x: hidden;
 }
 .grid-place-header {
@@ -31,14 +30,14 @@
 
       <div class="logo-and-byline">
         <perma-paste-logo></perma-paste-logo>
-        <pre>
+<!--        <pre>
        _ _                                           _   _                      _ _ 
   __ _| | |  _   _  ___  _   _   _ __   ___  ___  __| | (_)___    __ _ ___  ___(_|_)
  / _` | | | | | | |/ _ \| | | | | '_ \ / _ \/ _ \/ _` | | / __|  / _` / __|/ __| | |
 | (_| | | | | |_| | (_) | |_| | | | | |  __/  __/ (_| | | \__ \ | (_| \__ \ (__| | |
  \__,_|_|_|  \__, |\___/ \__,_| |_| |_|\___|\___|\__,_| |_|___/  \__,_|___/\___|_|_|
              |___/       
-        </pre>
+        </pre> -->
       </div>
 
       <find-pastes-link></find-pastes-link>
@@ -62,17 +61,18 @@
 .header {
   display: flex;
   justify-content: center;
-  
 }
 
 .header-bar {
   flex-grow: 1;
+  flex-shrink: 1;
   display: flex;
   align-items: flex-start;
 }
 
 .logo-and-byline {
   flex-grow: 1;
+  flex-shrink: 1;
   max-width: 800px;
   padding: 0.5em;
   /*padding-left: 0.5rem;
