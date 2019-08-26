@@ -1,6 +1,7 @@
 {
     "name": "PermaPaste 1.0.0",
     "short_name": "PermaPaste",
+    "start_url": "/",
     "icons": [
         {
             "src": "./android-chrome-192x192.png",
