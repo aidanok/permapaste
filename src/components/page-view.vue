@@ -120,20 +120,20 @@ export default class extends Vue {
     console.log('Getting paste with txId:' + txId)
     console.log(`Url Password is ${this.urlPassword}`)
     let container: EncryptedPasteContainer | PasteContainer | undefined
-
+    let error404s = 2; // sometimes we get 404s for pending txs, but we shouldnt keep getting them ! 
     // Loop on pending, otherwise break.
     while(true) {
       try {
         container = await getPaste(txId)
         break;
       } catch(e) {
-        if (e.type !== 'TX_PENDING') {
+        if (e.type !== 'TX_PENDING' || (this.isPending && e.type === 'TX_NOT_FOUND' && (error404s--) == 0) ) {
           this.errors.push(e.message || e.type)
           break;
         } else {
           console.info('TX_PENDING, Will Retry')
           this.isPending = true;
-          await new Promise(res => setTimeout(res, 57000))
+          await new Promise(res => setTimeout(res, 31337))
         }
       }
     }
