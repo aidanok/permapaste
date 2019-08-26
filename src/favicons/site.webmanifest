@@ -1,19 +1,14 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "PermaPaste 1.0.0",
+    "short_name": "PermaPaste",
     "icons": [
         {
             "src": "./android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
-        },
-        {
-            "src": "./android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
         }
     ],
-    "theme_color": "#f0f0d2",
-    "background_color": "#f0f0d2",
+    "theme_color": "#ffbf00",
+    "background_color": "#ffbf00",
     "display": "minimal-ui"
 }
