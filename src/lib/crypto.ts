@@ -110,22 +110,25 @@ async function deriveKey(salt: Uint8Array, password: string) {
 }
 
 // Wraps scrypt-async as promise and sets parameters
-// N increased to 2^15 (from default of 2^14) and P increased from 1 to 3 
+// N increased to 2^16 (from default of 2^14) and P increased from 1 to 2 
 // Ideally we would increase N more, but this causes clients with low memory to 
-// fail (mobiles). Increasing P from 1 to 3 triples the work needed.  
+// fail (mobiles). Increasing P from 1 to 2 doubles the CPU time needed.  
 
 // Memory requirements for N: 
 // 2^14 : 16MB 
 // 2^15 : 32MB
 // 2^16 : 64MB
+// 2^17 : 128MB 
+// 2^18 : 256MB - what keybase warp wallet uses
+// 2^19 : 512MB - chrome mobile throws errors trying to use this amount
 
-function scryptPromise(password: string, salt: Uint8Array): Promise<Uint8Array> {
+function scryptPromise(password: string, salt: Uint8Array, { NPOW = 16, P = 2, R = 8 } = {}): Promise<Uint8Array> {
   
   // scrypt-async typings are incorrect so we need a few 'as any' 
   return new Promise((res, rej) => {
-    scrpyt(password as any, salt as any, {  N: Math.pow(2, 15),
-      r: 8,
-      p: 3,
+    scrpyt(password as any, salt as any, {  N: Math.pow(2, NPOW),
+      r: R,
+      p: P,
       dkLen: 256,
       interruptStep: 200,
       encoding: 'binary'}, (result: any) => {
