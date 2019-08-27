@@ -3,13 +3,13 @@
   max-width: 800px; 
   margin-left: auto;
   margin-right: auto;
-  padding: 1rem;
-
-  
+  padding: 1rem; 
 }
 pre {
   margin: 0;
   white-space: pre;
+  font-family: monospace;
+  font-size: 14px;
 }
 </style>
 
@@ -19,9 +19,7 @@ pre {
     <div v-if="paste.pasteFormat === 'markdown'" class="markdown-body markdown-sanity"  v-html="getRenderedMarkdown()">
     </div>
     
-    <pre v-if="paste.pasteFormat === 'plaintext'">
-      {{ paste.pasteText }}
-    </pre>
+    <pre v-if="paste.pasteFormat === 'plaintext'">{{ paste.pasteText }}</pre>
 
   </div>
 </template>
