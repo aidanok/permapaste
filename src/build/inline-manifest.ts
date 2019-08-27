@@ -18,12 +18,24 @@ export async function inlineManifest(inputFile: string, targetHtmlFile: string) 
   const inlinedJSON = JSON.stringify(manifest, undefined, 2);
   const datauri = new Datauri();
   const encoded = datauri.format('.json', inlinedJSON);
+  // Fix the mime type
   const inlined = encoded.content.replace('data:application/json', 'data:application/manifest+json')
   const html = `<link rel="manifest" href="${inlined}">`;
-  const targetFileContent = fs.readFileSync(targetHtmlFile).toString();
   
-  // just search for the closing title tag and replace, bit hacky but meh. 
-  const resultContent = targetFileContent.replace('</title>', `</title>${html}`)
+  const targetFileContent = fs.readFileSync(targetHtmlFile).toString();
+  // just search for the closing title tag and inlined link directly after it.
+  const match = targetFileContent.match(/<\/title>/mi);
+  if (!match || typeof match.index !== 'number') {
+    throw new Error('Could not find closing title tag, unable to inline.')
+  } 
+  
+  const resultContent = 
+    targetFileContent.substr(0, match.index+8)
+    + 
+    html 
+    + 
+    targetFileContent.substr(match.index+8);
+ 
   if (resultContent === targetFileContent) {
     throw new Error('Couldnt insert into HTML')
   }
