@@ -47,14 +47,12 @@ import PageFind from './components/page-find.vue'
 
 import PostStepEdit from './components/post-step-edit.vue'
 import PostStepPrivacy from './components/post-step-privacy.vue'
-import PostPreview from './components/post-preview.vue'
 import PostEditor from './components/post-editor.vue'
 import PostStepConfirm from './components/post-step-confirm.vue'
 import PostStepFinished from './components/post-step-finished.vue'
 
 const routes = [
   { path: '/', redirect: '/paste/edit' },
-  { path: '/paste/preview', component: PostPreview },
   { path: '/paste/edit-fullscreen', component: PostEditor, props: { fullScreenMode: true } },
   { 
     path: '/paste', component: PagePost, 
