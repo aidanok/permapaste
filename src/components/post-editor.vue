@@ -61,6 +61,7 @@
 
 <template>
   <div 
+    @click="detectDoubleTaps"
     class="paste-text-editor-content" 
     v-bind:class="{ 'full-screen-height': fullScreenMode, 'hide-border': previewing && fullScreenMode }">
     
@@ -79,7 +80,7 @@
       v-bind:class="{ 'hide': previewing, 'markdown-textarea': editing.paste.pasteFormat === 'markdown' } " 
       placeholder="">
       </textarea>
-    <paste-render v-if="previewing" class="preview-window" :paste="editing.paste"></paste-render>
+    <paste-render  v-if="previewing" class="preview-window" :paste="editing.paste"></paste-render>
   </div>
 </template>
 
@@ -100,6 +101,16 @@ export default class extends Vue {
 
   editing = globalStore.PasteEditing
   previewing = false;
+
+  lastTap = Number.NEGATIVE_INFINITY
+
+  detectDoubleTaps() {
+    const n = new Date().getTime() 
+    if (this.previewing && (n - this.lastTap < 300)) {
+      this.previewToggle() 
+    }
+    this.lastTap = n;
+  }
 
   fullScreenToggle() {
     if (this.fullScreenMode) {
