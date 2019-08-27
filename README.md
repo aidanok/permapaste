@@ -5,7 +5,7 @@ Store plain text ascii documents, markdown documents on the Arweave Permaweb. St
 
 You do not need your private wallet key to open previously encrypted pastes, only the tx id (url) and passphrase.
 
-The current version is deployed at: https://arweave.net/b97TBGU6PMz--4OYWNr_ZzlHotyCvbqWvZl5b9LORc
+The current version is deployed at: https://arweave.net/pb97TBGU6PMz--4OYWNr_ZzlHotyCvbqWvZl5b9LORc
 
 Other features
 
