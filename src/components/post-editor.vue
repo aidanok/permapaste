@@ -16,7 +16,6 @@
   
   overflow: auto;
   resize: none;
-  width: calc(100%-2px);
   border: none;
   outline: none;
   border-top: 1px solid #aaa;
