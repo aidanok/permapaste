@@ -19,7 +19,8 @@
   border: none;
   outline: none;
   padding: 0.5em;
-  border-top: 1px solid #aaa;
+  padding-top: 1em;
+  border-top: 1px solid #ddd;
 }
 .paste-text-editor-button-bar {
   display: flex;
@@ -27,22 +28,47 @@
   align-content: center;
   flex-shrink: 0;
   flex-grow: 0;
+  border-bottom: 1px solid #aaa;
+  background: linear-gradient(to right, rgba(245, 251, 255, 0.25) 0%, rgba(238, 238, 238, 0.25)100%);
+  box-shadow: 
+    inset 0 1px 3px -1px rgba(0,0,0,0.24);
+  
 }
 .paste-text-editor-button-bar > button {
-  padding: 0.3em;
+  padding: 0.4em 0.65em;
   display: inline-block;
-  width: 7em;
-  border-top: 0px;
-  border-bottom: 0px;
-  border-right: 0;
+  min-width: 4em;
   align-self: stretch;
   flex-shrink: 0;
+  background: none;
   /*height: 1em;*/
   /*transform: translateY(calc(2em + 2px));*/
 }
-.paste-text-editor-button-bar button:not(:last-child) {
-  border-right: none;
+
+
+.right-button {
+  justify-self: end;
+  border: none;
+  border-left: 1px solid #aaa;
 }
+
+.left-button {
+  justify-self: start;
+  border: none;
+  border-right: 1px solid #aaa;
+}
+
+/* Put on the first button to push to the right */
+.push-button {
+  margin-left: auto;
+}
+
+
+
+
+
+
+
 .hide {
   display: none !important;
 }
@@ -56,6 +82,11 @@
 .markdown-textarea {
   white-space: pre-wrap;
 }
+
+input [type="file"] {
+  display: none;
+}
+
 </style>
 
 <template>
@@ -63,12 +94,16 @@
     @click="detectDoubleTaps"
     class="paste-text-editor-content">
 
+    <!-- Outside button --> 
+    <input ref="fileInput" type="file" hidden @change="onFilesSelected">
+      
     <div 
       class="paste-text-editor-button-bar"
       v-bind:class="{ hide: previewing }">
-
-      <button class="secondary-btn" @click="fullScreenToggle">&#11034;</button> 
-      <button class="secondary-btn" @click="previewToggle">{{ previewToggleText }}</button>
+      <button class="secondary-btn right-button" @click="clear">Clear</button>
+      <button class="secondary-btn right-button" @click="load">Load Text File</button>
+      <button class="secondary-btn right-button" @click="fullScreenToggle">&#11034;</button> 
+      <button class="secondary-btn right-button" @click="previewToggle">{{ previewToggleText }}</button>
     </div>
 
     <textarea 
@@ -103,7 +138,55 @@ export default class extends Vue {
 
   lastTap = Number.NEGATIVE_INFINITY
 
+
+  async onFilesSelected(event: any) {
+    const files: File[] = event.target.files
+    const reader = new FileReader()
+    if (files[0]) {
+      const fileName = files[0].name
+      const fileSize = files[0].size
+      if (fileSize > 1024*1024*2) {
+        alert('File over 2MB, not inserting!') 
+      }
+      const reader = new FileReader()
+      
+      // Use FileReaders event interface
+      await new Promise((res, rej) => {
+        reader.onload = res
+        reader.onerror = rej
+        reader.readAsText(files[0])
+      })
+
+      const text = reader.result as string;
+      const match = fileName.match(/\.[0-9a-z]+$/ig)
+      const ext = match && match[0].substr(1);
+      this.editing.paste.pasteText = text;
+      // Githubs markdown extenions
+      const isMarkdown = 
+        ext 
+        && 
+         ['markdown', 'mdown', 'mkdn', 'mkd', 'md'].filter(x => x.toUpperCase() === ext.toUpperCase()).length > 0
+
+      this.editing.paste.pasteFormat = isMarkdown ? 'markdown' : 'plaintext'
+      
+    }
+  }
+
  
+  clear() {
+    let clear = true; 
+    if (!this.editing.isDefaultText() && this.editing.paste.pasteText) {
+      clear = window.confirm('You have changes, delete all text?')
+    }
+    if (clear) {
+      this.editing.paste.pasteText = '';
+      this.editing.paste.pasteTitle = '';
+    }
+  }
+
+  load() {
+    (this.$refs.fileInput as any).click();
+  }
 
   focusTextArea() {
     (this.$refs.mainTextArea as any).focus()
