@@ -5,7 +5,7 @@ Store plain text ascii documents, markdown documents on the Arweave Permaweb. St
 
 You do not need your private wallet key to open previously encrypted pastes, only the tx id (url) and passphrase.
 
-The current version is deployed at: https://arweave.net/pb97TBGU6PMz--4OYWNr_ZzlHotyCvbqWvZl5b9LORc
+The current version is deployed at: https://arweave.net/z_NhVkfe-qeuHhc3i4GZewK-tLgwhFdF-S74-v8rC7A
 
 Other features
 
@@ -20,8 +20,8 @@ Other features
 - Publish public pastes & documents
 - Private notepad
 - Private sharing of pastes & documents  
+- Private storage of key files, wallet backups, etc.
 - Publish ascii art, e-zines or other ascii based content on the Arweave blockchain
-
 
 ## Potential Future Features & Improvments
 
@@ -35,7 +35,6 @@ Other features
 - Password strength checking, heuristic and against haveibeenpwned database.
 - File attachments
 - Re-introduce hightlight.js and support code snippets more explicitly
-- Insert file into editor. Insert text file as editor content, auto select format
 - Use a wasm module for scrypt to decrease encrypt/decrypt time.
 
 
