@@ -2,7 +2,6 @@
 import scrpyt from 'scrypt-async'
 import * as ArweaveUtils from 'arweave/web/lib/utils' // for base64url utils
 
-
 /**
  * Encrypt a piece of string data, with a given password.  
  * Password will be passed through a key-stretching function
@@ -33,7 +32,9 @@ export async function encryptData(str: string, password: string): Promise<{ encr
     key,
     new TextEncoder().encode(str)
   );
+
   const encrypted = new Uint8Array(20+20+ciphertext.byteLength) 
+  
   encrypted.set(salt, 0)
   encrypted.set(iv, salt.byteLength)
   encrypted.set(new Uint8Array(ciphertext), salt.byteLength + iv.byteLength)
@@ -72,7 +73,7 @@ export async function decryptData(encrypted: ArrayBuffer, password: string): Pro
 /**
  * Derives a 256bit key from salt and password.
  * 
- * Uses scrypt with N = 2^15  R = 8, P = 3 and follows that 
+ * Uses scrypt with N = 2^16  R = 8, P = 2 and follows that 
  * with the browsers PBKDF2 set at 250,000 iterations.
  *  
  * @param salt 
