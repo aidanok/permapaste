@@ -116,10 +116,7 @@ export default class extends Vue {
       }
     }
   }
-
-  beforeDestroy() {
-    window.onbeforeunload = null;
-  }
+  
 }
 </script>
 
