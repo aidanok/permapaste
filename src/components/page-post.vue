@@ -110,13 +110,15 @@ export default class extends Vue {
   
   created() {
     const unloadMessage = 'Your edits will be lost if you leave, are you sure?';    
-    window.onbeforeunload = (e) => {
-      if (!globalStore.PasteEditing.isDefaultText()) {
-        return unloadMessage;
+    if (!window.onbeforeunload) {
+      window.onbeforeunload = (e) => {
+        if (!globalStore.PasteEditing.isDefaultText()) {
+          return unloadMessage;
+        }
       }
     }
   }
-  
+
 }
 </script>
 
