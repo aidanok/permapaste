@@ -18,6 +18,7 @@
   resize: none;
   border: none;
   outline: none;
+  padding: 0.5em;
   border-top: 1px solid #aaa;
 }
 .paste-text-editor-button-bar {
@@ -49,7 +50,6 @@
   border: none !important; 
 }
 .preview-window {
-  border-top: 1px solid #aaa;
   overflow: auto;
   flex-grow: 1;
 }
@@ -61,25 +61,27 @@
 <template>
   <div 
     @click="detectDoubleTaps"
-    class="paste-text-editor-content" 
-    v-bind:class="{ 'full-screen-height': fullScreenMode, 'hide-border': previewing && fullScreenMode }">
-    
+    class="paste-text-editor-content">
+
     <div 
       class="paste-text-editor-button-bar"
-      v-bind:class="{ hide: previewing && fullScreenMode }">
+      v-bind:class="{ hide: previewing }">
 
-      <button v-bind:class="{ hide: fullScreenMode }" class="secondary-btn" @click="fullScreenToggle"> Full-screen </button> 
+      <button class="secondary-btn" @click="fullScreenToggle">&#11034;</button> 
       <button class="secondary-btn" @click="previewToggle">{{ previewToggleText }}</button>
     </div>
 
     <textarea 
       ref="mainTextArea" 
       class="paste-textarea"
+      @focus="$emit('text-area-focus')"
+      @blur="$emit('text-area-blur')"
+      @click="$emit('text-area-click')"
       v-model="editing.paste.pasteText"
       v-bind:class="{ 'hide': previewing, 'markdown-textarea': editing.paste.pasteFormat === 'markdown' } " 
       placeholder="">
       </textarea>
-    <paste-render  v-if="previewing" class="preview-window" :paste="editing.paste"></paste-render>
+    <paste-render v-if="previewing" class="preview-window" :paste="editing.paste"></paste-render>
   </div>
 </template>
 
@@ -95,45 +97,43 @@ import { setTimeout } from 'timers';
 @Component
 export default class extends Vue {
   
-  @Prop({ default: false })
-  fullScreenMode!: boolean; 
-
+ 
   editing = globalStore.PasteEditing
   previewing = false;
 
   lastTap = Number.NEGATIVE_INFINITY
 
+ 
+
+  focusTextArea() {
+    (this.$refs.mainTextArea as any).focus()
+  }
+
   detectDoubleTaps() {
+    if (!this.previewing) {
+      return
+    }
     const n = new Date().getTime() 
-    if (this.previewing && (n - this.lastTap < 300)) {
+    if ((n - this.lastTap < 450)) {
+      // This will always just pop the route
       this.previewToggle() 
     }
     this.lastTap = n;
   }
 
   fullScreenToggle() {
-    if (this.fullScreenMode) {
-      (this as any).$router.relace({ path: '/paste/edit' })
-    } else {
-      (this as any).$router.push({ path: '/paste/edit-fullscreen',  props: { fullScreenMode: true } })
-    }
+    this.$emit('full-screen-toggle');
   }
 
   previewToggle() {
     if (this.previewing) {
-      // This will trigger the watchQuery below.
-      (this as any).$router.go(-1);
-      // setTimeout()
-
-      // (this as any).$refs.mainTextArea.focus();
+      this.$router.go(-1);
     }
     else {
-      (this as any).$router.push({ query: { previewing: 'true' } })
+      console.log(this.$route.query)
+      const query = Object.assign({}, this.$route.query, { previewing: true }) 
+      this.$router.push({ query })
     }
-  }
-
-  get fullScreenToggleText(): string {
-    return this.fullScreenMode ? 'Back' : 'Fullscreen'
   }
 
   get previewToggleText(): string {
@@ -146,21 +146,8 @@ export default class extends Vue {
 
   @Watch('$route.query') 
   watchQuery() {
-    console.log((this as any).$route.query)
-    this.previewing = (this as any).$route.query.previewing === 'true'
-    console.log((this as any).$refs);
-      
-    // Always focus textarea. needs a setTimeout in case its still in hidden state.
-    // Might want to NOT focus it if its really an initial page load and not in full-screen mode, 
-    // though it seems to work fine. a minor nit is if we are not in full screen mode and we 
-    // were actually focused on some other element (like the title input ) before hitting preview, 
-    // in that case we still focus on the main text area when we come out of preview.
-    if (!this.previewing) {
-      /*setTimeout(() => {
-        (this as any).$refs.mainTextArea.focus();
-      }, 0);*/
-      
-    }
+    this.previewing = this.$route.query.previewing !== undefined
+    this.$emit(this.previewing ? 'preview-on' : 'preview-off')
   }
 
   

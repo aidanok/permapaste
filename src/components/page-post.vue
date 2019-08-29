@@ -30,28 +30,25 @@
 
       <div class="logo-and-byline">
         <perma-paste-logo></perma-paste-logo>
-<!--        <pre>
+  <!--        <pre>
        _ _                                           _   _                      _ _ 
   __ _| | |  _   _  ___  _   _   _ __   ___  ___  __| | (_)___    __ _ ___  ___(_|_)
  / _` | | | | | | |/ _ \| | | | | '_ \ / _ \/ _ \/ _` | | / __|  / _` / __|/ __| | |
 | (_| | | | | |_| | (_) | |_| | | | | |  __/  __/ (_| | | \__ \ | (_| \__ \ (__| | |
  \__,_|_|_|  \__, |\___/ \__,_| |_| |_|\___|\___|\__,_| |_|___/  \__,_|___/\___|_|_|
              |___/       
-        </pre> -->
+        </pre> --> 
       </div>
 
       <find-pastes-link></find-pastes-link>
     </div>
 
-  
+ 
+    <transition name="slide-fade" mode="out-in">
+      <router-view class="grid-place-content"></router-view>
+    </transition>
     
-    <div class="grid-place-content">
-      <transition name="slide-fade" mode="out-in">
-        <router-view></router-view>
-      </transition>
-     
-    </div>
-
+   
   </div>
   
 </template>
@@ -110,6 +107,7 @@ import { globalStore } from '../app-state';
 
 @Component
 export default class extends Vue {
+  
   created() {
     const unloadMessage = 'Your edits will be lost if you leave, are you sure?';    
     window.onbeforeunload = (e) => {
@@ -117,6 +115,10 @@ export default class extends Vue {
         return unloadMessage;
       }
     }
+  }
+
+  beforeDestroy() {
+    window.onbeforeunload = null;
   }
 }
 </script>
