@@ -67,7 +67,7 @@
 .content-pane {
   z-index: 100;
   background: white;
-
+ 
   /* 
    * This overflow: auto was added *only* to get scrollbars when: 
    * in full screen preview mode of plaintext on firefox
@@ -134,7 +134,7 @@ export default class extends Vue {
 
     textAreaWasFocused() {
       // On smaller screens, auto full screen
-      if (!this.editorFullScreen && (window.innerHeight < 800 || window.innerWidth < 800)) {
+      if (!this.editorFullScreen && (window.innerHeight < 730 || window.innerWidth < 730)) {
         this.toggleEditorFullScreen()
       }
     }
