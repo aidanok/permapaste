@@ -39,7 +39,7 @@
     "vue-router": "3.0.6"
   },
   "devDependencies": {
-    "parcel": "1.12.3",
+    "parcel": "2.8.2",
     "@vue/component-compiler-utils": "3.0.0",
     "parcel-plugin-bundle-visualiser": "1.2.0",
     "sass": "1.22.2",
